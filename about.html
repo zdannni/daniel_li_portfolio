@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Daniel Li</title>
+<meta name="description" content="About Daniel Li — UX Researcher and Research Operations practitioner. Background, approach, methods, and what I'm looking for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* -------- About Hero -------- */
+  .about-hero {
+    padding: 80px 0 60px;
+  }
+  .about-hero .container {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-hero .text .eyebrow { margin-bottom: 36px; }
+  .about-hero h1 {
+    font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 720px;
+  }
+  .about-hero h1 em { color: var(--primary); }
+  .about-hero .lede {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 560px;
+    margin-bottom: 22px;
+  }
+
+  /* Portrait placeholder */
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--bg-sage);
+    border: 1px solid var(--border);
+  }
+  .portrait-frame .placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: var(--primary-dark);
+    text-align: center;
+    padding: 32px;
+  }
+  .portrait-frame .placeholder .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--bg);
+  }
+  .portrait-frame .placeholder .note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary-dark);
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+  .portrait-frame .decor-a {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+  .portrait-frame .decor-b {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.4;
+  }
+
+  /* -------- Bio sections -------- */
+  .bio-section {
+    padding: 100px 0;
+  }
+  .bio-section .container {
+    max-width: 880px;
+  }
+  .bio-section h2 {
+    font-size: clamp(1.875rem, 3.2vw, 2.75rem);
+    margin-bottom: 32px;
+  }
+  .bio-section h2 em { color: var(--primary); }
+  .bio-section p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-2);
+    margin-bottom: 1.25rem;
+  }
+  .bio-section p strong { color: var(--ink); font-weight: 500; }
+
+  /* -------- Section headers -------- */
+  .section-head {
+    margin-bottom: 56px;
+  }
+  .section-head .eyebrow { margin-bottom: 20px; }
+  .section-head h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    max-width: 720px;
+  }
+
+  /* -------- Approach (expanded) -------- */
+  .approach-deep {
+    padding: 100px 0;
+    background: var(--bg-alt);
+  }
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .approach-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    position: relative;
+  }
+  .approach-tile .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .approach-tile h3 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .approach-tile p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .approach-tile .accent-line {
+    position: absolute;
+    top: 0;
+    left: 36px;
+    width: 32px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 0 0 2px 2px;
+  }
+
+  /* -------- Methods -------- */
+  .methods-section {
+    padding: 100px 0;
+  }
+  .methods-section .container {
+    max-width: 1100px;
+  }
+  .methods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .method-pill {
+    padding: 22px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .method-pill:hover {
+    border-color: var(--primary);
+    background: var(--bg-sage);
+  }
+  .method-pill .method-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .method-pill .method-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* -------- Education / Timeline -------- */
+  .edu-section {
+    padding: 100px 0;
+    background: var(--bg-alt);
+  }
+  .edu-section .container {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+  }
+  .edu-timeline {
+    position: relative;
+  }
+  .edu-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 14px;
+    bottom: 14px;
+    width: 1px;
+    background: var(--border-strong);
+  }
+  .edu-item {
+    position: relative;
+    padding-left: 40px;
+    padding-bottom: 40px;
+  }
+  .edu-item:last-child { padding-bottom: 0; }
+  .edu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bg-alt);
+    border: 2px solid var(--primary);
+  }
+  .edu-item:first-child::before {
+    background: var(--primary);
+  }
+  .edu-item .edu-year {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .edu-item h4 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .edu-item .school {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+  .edu-item .gpa {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+
+  /* -------- What I'm looking for -------- */
+  .looking-section {
+    padding: 100px 0;
+  }
+  .looking-section .inner {
+    background: var(--primary-deep);
+    color: var(--bg);
+    border-radius: var(--radius-xl);
+    padding: 80px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .looking-section .inner h2 {
+    color: var(--bg);
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    max-width: 720px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .looking-section .inner h2 em { color: var(--accent); }
+  .looking-section .inner p {
+    font-size: 16px;
+    color: rgba(239, 236, 223, 0.75);
+    max-width: 620px;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+  .looking-section .inner .decor-a {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.25;
+  }
+  .looking-section .inner .decor-b {
+    position: absolute;
+    bottom: -40px;
+    right: 120px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.3;
+  }
+  .looking-section .cta-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .looking-section .btn-primary {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .looking-section .btn-primary:hover {
+    background: var(--accent);
+  }
+
+  /* -------- Responsive -------- */
+  @media (max-width: 980px) {
+    .about-hero { padding: 50px 0 40px; }
+    .about-hero .container {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .portrait-frame { max-width: 440px; }
+    .bio-section, .approach-deep, .methods-section, .edu-section, .looking-section { padding: 70px 0; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .methods-grid { grid-template-columns: repeat(2, 1fr); }
+    .edu-section .container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .looking-section .inner { padding: 56px 40px; }
+  }
+  @media (max-width: 600px) {
+    .methods-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Daniel Li — UXR</a>
+    <div class="nav-links">
+      <a href="index.html">Work</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="about-hero">
+  <div class="container">
+    <div class="text">
+      <div class="eyebrow">About me</div>
+      <h1>Research is a <em>craft.</em> I treat it that way.</h1>
+      <p class="lede">I'm Daniel, a UX Researcher and Research Operations practitioner based in Los Angeles. I help product teams turn messy, ambiguous questions into research that stakeholders trust enough to act on.</p>
+      <p class="lede">My path into research came through caring about people and being allergic to research that sits unread. I studied Cognitive Science at UC San Diego and earned a Master's in Information from the University of Michigan, where I learned that methods are the easy part — it's the judgment underneath them that makes research useful.</p>
+    </div>
+    <div class="portrait-frame">
+      <div class="decor-a"></div>
+      <div class="decor-b"></div>
+      <div class="placeholder">
+        <div class="avatar">DL</div>
+        <div class="note">
+          Portrait goes here<br>
+          <span style="opacity: 0.6;">(replace this block with a photo of you)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIO ============ -->
+<section class="bio-section">
+  <div class="container">
+    <h2>A short <em>biography.</em></h2>
+    <p>I came to user research through a winding path. I studied <strong>Cognitive Science</strong> at UC San Diego because I was interested in how people make decisions under uncertainty, and I continued at <strong>the University of Michigan</strong> where I specialized in UX research and research methods. Along the way, I learned that the most interesting research problems live at the edges — where a team's assumptions meet the messy reality of how people actually think, and where what a product claims to offer meets what users actually experience.</p>
+    <p>My Safemo internship taught me what research operations actually means. It's not administration — it's the sum of small, deliberate choices about how research gets framed, who it speaks to, and how it lands with the people who have to act on it. I proposed the rainbow-spreadsheet synthesis approach, the product-market fit versus usability framing, and the chronological presentation that mirrored how users actually experienced the setup process. None of those were spelled out in the research plan; they were judgment calls made in service of the team making better decisions.</p>
+    <p>My Tripal capstone taught me what it means to own a full research cycle under real time pressure — scoping, method selection, interviewing, synthesizing, facilitating a design sprint, and watching the research hold its weight in front of real investors. The research placed second at a business competition and helped the team secure early funding. That outcome mattered to me less than what the project taught me about translation: research is only as useful as the translation between what you find and what the team can act on.</p>
+    <p>I write, speak, and work in both English and Mandarin, which means I can bridge research practice between US and Chinese product teams — something I care about increasingly as more of the interesting product work happens across that bridge.</p>
+  </div>
+</section>
+
+<!-- ============ APPROACH ============ -->
+<section class="approach-deep">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">How I work</div>
+      <h2>Four principles I carry into <em>every project.</em></h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-tile">
+        <span class="accent-line"></span>
+        <span class="num">01 / Scoping</span>
+        <h3>The framing decision is the research decision.</h3>
+        <p>A research question phrased one way is tractable; phrased another way it's impossible. The most consequential choice I make on any project happens before I open a doc — it's deciding which version of the question the research is actually going to answer.</p>
+      </div>
+      <div class="approach-tile">
+        <span class="accent-line"></span>
+        <span class="num">02 / Methods</span>
+        <h3>Methods are chosen for reasons, and I can explain them.</h3>
+        <p>Mixed-methods work gets muddled when the sequencing isn't intentional. I sequence interviews before surveys because qualitative work surfaces what to measure, and I choose tools like diary studies or design sprints when the constraint of the project makes them the right answer, not because they're impressive.</p>
+      </div>
+      <div class="approach-tile">
+        <span class="accent-line"></span>
+        <span class="num">03 / Synthesis</span>
+        <h3>Good synthesis compresses rather than accumulates.</h3>
+        <p>A research report with forty findings is a report no one acts on. My job in synthesis is to find the two or three insights that actually shift decisions, frame them so they land with the team, and push the rest into an appendix without apologizing.</p>
+      </div>
+      <div class="approach-tile">
+        <span class="accent-line"></span>
+        <span class="num">04 / Communication</span>
+        <h3>How a finding lands is part of the research.</h3>
+        <p>Research that stakeholders can't act on is research that hasn't done its job. I design presentations the same way I design studies — with a theory about how people will encounter the findings and what they need in order to make decisions from them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHODS ============ -->
+<section class="methods-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Toolkit</div>
+      <h2>Methods I use, in the order I typically reach for them.</h2>
+    </div>
+    <div class="methods-grid">
+      <div class="method-pill">
+        <div class="method-label">Generative</div>
+        <div class="method-name">In-depth interviews</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Generative</div>
+        <div class="method-name">Desktop &amp; landscape research</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Generative</div>
+        <div class="method-name">Diary studies (longitudinal)</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Evaluative</div>
+        <div class="method-name">Usability testing (moderated)</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Evaluative</div>
+        <div class="method-name">Concept testing</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Quantitative</div>
+        <div class="method-name">Survey design &amp; analysis</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Synthesis</div>
+        <div class="method-name">Rainbow spreadsheet coding</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Synthesis</div>
+        <div class="method-name">Affinity diagramming</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Facilitation</div>
+        <div class="method-name">Design sprint workshops</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">ResearchOps</div>
+        <div class="method-name">Screener &amp; protocol design</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">ResearchOps</div>
+        <div class="method-name">Participant recruitment &amp; logistics</div>
+      </div>
+      <div class="method-pill">
+        <div class="method-label">Tools</div>
+        <div class="method-name">Dovetail · Figma · Qualtrics · Notion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="edu-section">
+  <div class="container">
+    <div>
+      <div class="section-head" style="margin-bottom: 0;">
+        <div class="eyebrow">Background</div>
+        <h2>Education.</h2>
+      </div>
+    </div>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <div class="edu-year">2022 — 2024</div>
+        <h4>Master of Science, Information</h4>
+        <div class="school">University of Michigan — Ann Arbor</div>
+        <div class="gpa">UX Research &amp; Design · GPA 3.9 / 4.0</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2018 — 2022</div>
+        <h4>Bachelor of Science, Cognitive Science</h4>
+        <div class="school">University of California, San Diego</div>
+        <div class="gpa">GPA 3.8 / 4.0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOOKING FOR ============ -->
+<section class="looking-section">
+  <div class="container">
+    <div class="inner">
+      <h2>What I'm <em>looking for.</em></h2>
+      <p>I'm actively looking for UX Research and Research Operations roles where the craft matters — teams that care about rigor, care about translation, and care about the people on both ends of the study. I'm open to in-person, hybrid, and remote, and I'm targeting both the US and Beijing markets.</p>
+      <p>If you're building a research practice and you've read this far, I'd love to talk.</p>
+      <div class="cta-row">
+        <a href="mailto:your.email@example.com" class="btn btn-primary">Send an email <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-secondary">Download resume (PDF)</a>
+      </div>
+      <div class="decor-a"></div>
+      <div class="decor-b"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-intro">
+      <h3>Daniel Li.</h3>
+      <p class="tagline">UX Researcher &amp; Research Operations practitioner. Making research feel human, one decision at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Projects</h4>
+      <ul>
+        <li><a href="safemo.html">Safemo</a></li>
+        <li><a href="tripal.html">Tripal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Email</a></li>
+        <li><a href="#">Resume (PDF)</a></li>
+      </ul>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Daniel Li · Built with care in Los Angeles</span>
+      <span>Set in Besley, Figtree &amp; JetBrains Mono</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

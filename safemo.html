@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safemo — Daniel Li</title>
+<meta name="description" content="A two-round longitudinal field study that turned a failing security camera launch into a usable product. Setup time cut from 90 minutes to under 20. NPS from 3 to 8.5.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="case-study.css">
+<style>
+  /* -------- SAFEMO-specific: Tangled questions diagram -------- */
+  .tangled-questions {
+    margin: 56px 0;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tangled-questions .diagram-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 36px;
+  }
+  .tangled-questions .venn {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    height: 280px;
+    margin: 0 auto;
+  }
+  .tangled-questions .circle {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .tangled-questions .circle.left {
+    top: 10px;
+    left: 0;
+    background: rgba(107, 128, 87, 0.22);
+    color: var(--primary-deep);
+  }
+  .tangled-questions .circle.right {
+    top: 10px;
+    right: 0;
+    background: rgba(212, 165, 116, 0.35);
+    color: var(--accent-dark);
+  }
+  .tangled-questions .center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.6;
+    max-width: 180px;
+    z-index: 1;
+  }
+  .tangled-questions .caption {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 32px auto 0;
+    text-align: center;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+
+  /* -------- SAFEMO-specific: Rainbow spreadsheet visual -------- */
+  .rainbow-viz {
+    margin: 36px 0 56px;
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .rainbow-viz .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 20px;
+  }
+  .rainbow-grid {
+    display: grid;
+    grid-template-columns: 140px repeat(5, 1fr);
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+  .rainbow-grid .header-cell,
+  .rainbow-grid .row-label {
+    padding: 10px 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .rainbow-grid .header-cell {
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .rainbow-grid .row-label {
+    color: var(--ink);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+  .rainbow-grid .cell {
+    padding: 14px 8px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .rainbow-grid .cell.match { background: var(--primary); color: var(--bg); }
+  .rainbow-grid .cell.partial { background: var(--bg-apricot); color: var(--accent-dark); }
+  .rainbow-grid .cell.none { background: var(--bg-alt); color: var(--ink-4); }
+  .rainbow-viz .caption {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+
+  @media (max-width: 980px) {
+    .tangled-questions { padding: 36px 28px; }
+    .tangled-questions .venn { height: 360px; max-width: 320px; }
+    .tangled-questions .circle { width: 200px; height: 200px; font-size: 1rem; }
+    .tangled-questions .circle.left { top: 0; left: 50%; transform: translateX(-50%); }
+    .tangled-questions .circle.right { top: 160px; left: 50%; transform: translateX(-50%); }
+    .rainbow-grid { grid-template-columns: 100px repeat(5, 1fr); font-size: 8px; }
+    .rainbow-grid .header-cell, .rainbow-grid .row-label { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Daniel Li — UXR</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<div class="case-back container">
+  <a href="index.html" class="back-link">← Back to all work</a>
+</div>
+
+<section class="case-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Case Study · Internship</div>
+      <h1>Turning a failing launch into a <em>usable</em> product.</h1>
+      <p class="case-subtitle">A two-round longitudinal field study that diagnosed why a privacy-first security camera failed its launch — and validated the fix.</p>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-row"><span class="meta-key">Client</span><span class="meta-val">Safemo</span></div>
+      <div class="meta-row"><span class="meta-key">My role</span><span class="meta-val">Associate UX Researcher</span></div>
+      <div class="meta-row"><span class="meta-key">Timeline</span><span class="meta-val">May 2024 — Jan 2025</span></div>
+      <div class="meta-row"><span class="meta-key">Methods</span><span class="meta-val">Usability · Diary study · Interviews</span></div>
+      <div class="meta-row"><span class="meta-key">Team</span><span class="meta-val">Senior UXR · UX Design Lead · Stakeholders</span></div>
+    </div>
+  </div>
+
+  <div class="hero-metrics">
+    <div class="strip">
+      <div class="big-metric">
+        <div class="num">−77<em>%</em></div>
+        <div class="label">Setup time reduction<br>1.5hr → &lt;20min</div>
+      </div>
+      <div class="big-metric">
+        <div class="num">3 → 8.5</div>
+        <div class="label">NPS improvement<br>after Round 2</div>
+      </div>
+      <div class="big-metric">
+        <div class="num">2 <em>rounds</em></div>
+        <div class="label">Longitudinal study<br>5 mo. field work</div>
+      </div>
+      <div class="big-metric">
+        <div class="num">5 <em>families</em></div>
+        <div class="label">In-home participants<br>Bay Area &amp; Seattle</div>
+      </div>
+      <div class="decor-a"></div>
+      <div class="decor-b"></div>
+    </div>
+  </div>
+</section>
+
+<div class="case-body">
+  <aside class="case-nav">
+    <span class="label">Contents</span>
+    <ol>
+      <li><a href="#hook">Overview</a></li>
+      <li><a href="#challenge">The Challenge</a></li>
+      <li><a href="#approach">My Approach</a></li>
+      <li><a href="#insights">Key Insights</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+    </ol>
+  </aside>
+
+  <main class="case-main">
+
+    <section class="case-section" id="hook">
+      <span class="section-num">01 · Overview</span>
+      <h2>A privacy-first product that users <em>couldn't use.</em></h2>
+      <p class="intro-p">Safemo's wire-free security camera launched with a privacy-first promise — local storage, on-device AI, no cloud, no monthly fees — and <strong>missed its sales projections</strong>. Amazon reviews were brutal. The product had been engineered around a real value proposition, but something between the box and the user's experience was breaking.</p>
+      <p class="intro-p">Over two rounds of longitudinal mixed-methods research, the team cut setup time from an hour and a half to under twenty minutes and lifted NPS from 3 to 8.5. This is the story of how the research framing and analytical choices I pushed for helped turn early warnings into decisions stakeholders acted on.</p>
+    </section>
+
+    <section class="case-section" id="challenge">
+      <span class="section-num">02 · The Research Challenge</span>
+      <h2>The problems were <em>visible,</em> but not legible.</h2>
+      <p class="intro-p">By the time the research started, the product's problems were visible but not legible. Sales had disappointed, reviews were negative, and the team knew something was wrong — but "wrong" was spread across hardware setup, a confusing app, AI features that weren't landing, and a privacy story that was central to the marketing but unclear in the product.</p>
+      <p class="intro-p">The senior researcher's mandate was to untangle this into two questions: <strong>where was product-market fit actually breaking, and where were the usability failures costing users before they ever got to experience the features?</strong></p>
+
+      <div class="tangled-questions">
+        <div class="diagram-label">The two tangled questions</div>
+        <div class="venn">
+          <div class="circle left">Product-Market Fit<br><span style="font-size: 11px; font-family: var(--font-mono); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.75; display: block; margin-top: 6px;">are the values landing?</span></div>
+          <div class="circle right">Usability<br><span style="font-size: 11px; font-family: var(--font-mono); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.75; display: block; margin-top: 6px;">can they access it?</span></div>
+          <div class="center-text">tangled</div>
+        </div>
+        <p class="caption">A user who cannot finish setup never experiences the privacy feature — you cannot tell if the value proposition is weak or if users simply never got to perceive it.</p>
+      </div>
+
+      <p class="intro-p">That framing sounds clean in retrospect. The harder part was that these two questions are deeply tangled in a real product. We needed a research design that could separate these layers — and a synthesis approach that would not collapse them back together.</p>
+    </section>
+
+    <section class="case-section" id="approach">
+      <span class="section-num">03 · My Approach</span>
+      <h2>Two rounds, layered methods, deliberate sequencing.</h2>
+      <p class="intro-p">The study was designed by a senior researcher as a two-round longitudinal program. Round two would repeat the structure of round one after the team implemented changes, so we could test whether our framing was right.</p>
+
+      <div class="process-timeline">
+        <div class="label">Research program structure</div>
+        <div class="timeline-track three-phase">
+          <div class="phase">
+            <div class="phase-num">Round 1</div>
+            <h4>Diagnosis</h4>
+            <div class="duration">May — Aug 2024 · 3 months</div>
+            <ul>
+              <li>Usability test on setup</li>
+              <li>Post-setup interview</li>
+              <li>2-week diary study</li>
+              <li>Follow-up interview</li>
+            </ul>
+          </div>
+          <div class="phase middle">
+            <div class="phase-num">Between rounds</div>
+            <h4>Implementation</h4>
+            <p>Team revised manuals, rebuilt app IA, rewrote labels based on Round 1 findings</p>
+          </div>
+          <div class="phase">
+            <div class="phase-num">Round 2</div>
+            <h4>Validation</h4>
+            <div class="duration">Oct 2024 — Jan 2025 · 2 months</div>
+            <ul>
+              <li>Same study structure</li>
+              <li>New participants</li>
+              <li><strong>I owned this end-to-end</strong></li>
+              <li>Before / after report</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="intro-p">My first contribution was <strong>protocol design</strong>. I drafted the participant screener, the usability test moderation guide, the diary study prompts, and the follow-up interview protocol. The constraint that shaped most of those drafts was participant burden — we were asking people to host a camera system in their home for weeks, and every minute of unnecessary protocol friction would compound over the study.</p>
+
+      <h3>Key methodological choices I made</h3>
+
+      <div class="decisions-grid">
+        <div class="decision-card">
+          <span class="kind">Synthesis method</span>
+          <h4>Proposed rainbow spreadsheet analysis</h4>
+          <p>Five participants with multiple data streams each (setup observation, two interviews, two weeks of diary entries) required a structure that could hold both within-participant patterns and cross-participant themes without losing either.</p>
+        </div>
+        <div class="decision-card">
+          <span class="kind">Analytical framing</span>
+          <h4>Separated PMF from usability findings</h4>
+          <p>Conflating "the privacy story is weak" with "users cannot finish setup" would have made the recommendations incoherent. I proposed two parallel tracks so the team could act on each without mixing them up.</p>
+        </div>
+        <div class="decision-card">
+          <span class="kind">Presentation structure</span>
+          <h4>Split setup from sustained daily use</h4>
+          <p>A first-time setup user and a two-week power user are not the same person. Combining their feedback would have muddled the recommendations for both audiences.</p>
+        </div>
+        <div class="decision-card">
+          <span class="kind">Narrative ordering</span>
+          <h4>Chronological mirror of user mental model</h4>
+          <p>I ordered the usability findings along the user's actual journey — unboxing, setup, first use, sustained use — so stakeholders could map findings directly to their product flow.</p>
+        </div>
+      </div>
+
+      <div class="rainbow-viz">
+        <div class="label">Rainbow spreadsheet — simplified view</div>
+        <div class="rainbow-grid">
+          <div class="header-cell"></div>
+          <div class="header-cell">P1</div>
+          <div class="header-cell">P2</div>
+          <div class="header-cell">P3</div>
+          <div class="header-cell">P4</div>
+          <div class="header-cell">P5</div>
+          <div class="row-label">Setup struggle</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="row-label">"Extensions" confusion</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell partial">mixed</div>
+          <div class="cell match">yes</div>
+          <div class="row-label">Flooded alerts</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell none">no</div>
+          <div class="row-label">Privacy value unclear</div>
+          <div class="cell partial">mixed</div>
+          <div class="cell match">yes</div>
+          <div class="cell none">no</div>
+          <div class="cell match">yes</div>
+          <div class="cell partial">mixed</div>
+          <div class="row-label">Familiar faces fail</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell match">yes</div>
+          <div class="cell none">no</div>
+          <div class="cell match">yes</div>
+        </div>
+        <p class="caption">The structure lets you see at a glance when four out of five users encounter the same issue, while each participant's individual story stays traceable.</p>
+      </div>
+    </section>
+
+    <section class="case-section" id="insights">
+      <span class="section-num">04 · Key Insights</span>
+      <h2>Three findings that did most of the <em>work.</em></h2>
+      <p class="intro-p">Out of dozens of issues identified across setup, daily use, AI features, and privacy perception, three findings shaped what happened next.</p>
+
+      <div class="insight">
+        <div class="insight-header">
+          <div class="insight-num">01</div>
+          <h3>The setup experience was failing before users ever saw the product.</h3>
+        </div>
+        <p>Unclear component labeling, a manual split across four separate guides with an ambiguous sequence, and a power button hidden under the battery cap combined to create a setup process that took an average of <strong>90 minutes</strong>. One participant could not activate the camera without the moderator's help.</p>
+        <p>This was not a polish issue — it was an abandonment risk sitting at the front door of the product.</p>
+        <div class="pull-quote">
+          <p class="quote-text">From these four things, I'm actually not sure what's the first one. It's not immediately obvious how to connect this stuff, or what it goes to.</p>
+          <p class="quote-attr">Participant 3 · Round 1 setup test</p>
+        </div>
+        <div class="insight-evidence">
+          <strong>Evidence</strong><br>
+          On average, participants spent over 3 minutes figuring out how to activate the camera. One participant could not finish activation without moderator help. Average setup time across Round 1: <strong>1.5 hours</strong>.
+        </div>
+      </div>
+
+      <div class="insight">
+        <div class="insight-header">
+          <div class="insight-num">02</div>
+          <h3>The privacy value proposition was not landing the way the team expected.</h3>
+        </div>
+        <p>The strategic centerpiece of the product — local storage, on-device AI — was the marketing story. But the research revealed that users either barely noticed it (because setup had not emphasized it), questioned whether an unknown company's privacy claims could be trusted, or cared less about privacy for outdoor cameras than the product's positioning assumed.</p>
+        <p>The finding was not that privacy did not matter. It was that <strong>Safemo's specific implementation of privacy did not match how users actually thought about it.</strong></p>
+        <div class="pull-quote">
+          <p class="quote-text">This company doesn't have any known reputation to me. They're claiming what they do and they need to have some established good track record.</p>
+          <p class="quote-attr">Participant 4 · Round 1 interview</p>
+        </div>
+      </div>
+
+      <div class="insight">
+        <div class="insight-header">
+          <div class="insight-num">03</div>
+          <h3>The word "extensions" made the core features feel peripheral.</h3>
+        </div>
+        <p>This one emerged unexpectedly from the interview transcripts. Users were confused by the AI features being labeled as "extensions" in the app — <strong>four of five participants</strong> associated the word with plugins or third-party integrations, not with core functionality. What the team had intended as a technical descriptor was actively making the features feel peripheral and intimidating.</p>
+        <p>This insight was not on any interview guide. It surfaced from pattern recognition across quotes that all said some version of "I don't know what an extension is here." It was in the data, waiting to be noticed.</p>
+        <div class="pull-quote">
+          <p class="quote-text">I don't think of these as extensions. I think of extensions as plug-ins with other vendors. These look like core functionality to me.</p>
+          <p class="quote-attr">Participant 5 · Round 1 interview</p>
+        </div>
+        <div class="screenshot-placeholder">
+          Screenshot of the app showing the "extensions" label<br>
+          (you can drop an annotated UI screenshot here)
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="impact">
+      <span class="section-num">05 · Impact &amp; Decisions Influenced</span>
+      <h2>What changed — and what I <em>owned</em> in Round 2.</h2>
+      <p class="intro-p">The round-one findings went to stakeholders with a concrete set of recommendations: rewrite the manual, add explicit power-button guidance, rename the AI "extensions," restructure app navigation, and reposition privacy messaging around specific use cases. <strong>The team adopted most of these</strong> and implemented changes to the manual and the app's information architecture.</p>
+
+      <p class="intro-p">I owned Round 2 end-to-end — recruitment, moderation, diary study coordination, data collection, analysis, and the final report. Round 2 was the test of whether Round 1's framing had been right. If the setup findings were real, setup time should drop. If the navigation problems were real, discoverability should improve. <strong>The results validated the framing.</strong></p>
+
+      <div class="before-after">
+        <div class="before">
+          <div class="phase-label">Round 1 · Before</div>
+          <h4>Significant frictions in setup &amp; daily use</h4>
+          <ul>
+            <li>Instruction sequence across manual and app was inconsistent</li>
+            <li>Participants took over 3 minutes to activate cameras</li>
+            <li>Users confused by security modes with no explanations</li>
+            <li>Core functionalities lacked visibility</li>
+            <li>Users unhappy and unlikely to recommend</li>
+          </ul>
+          <div class="metric-row">
+            <div class="m">
+              <div class="v">90<span style="font-size: 1rem;">min</span></div>
+              <div class="l">Avg setup time</div>
+            </div>
+            <div class="m">
+              <div class="v">3<span style="font-size: 1rem;">/10</span></div>
+              <div class="l">NPS score</div>
+            </div>
+          </div>
+        </div>
+        <div class="after">
+          <div class="phase-label">Round 2 · After</div>
+          <h4>Setup streamlined, satisfaction restored</h4>
+          <ul>
+            <li>Both participants finished setup in under 20 minutes</li>
+            <li>Little to no friction in camera activation</li>
+            <li>User education on security modes improved onboarding</li>
+            <li>Integrated features hub increased discoverability</li>
+            <li>Users voluntarily praised the setup as easier than other cameras</li>
+          </ul>
+          <div class="metric-row">
+            <div class="m">
+              <div class="v">&lt;20<span style="font-size: 1rem;">min</span></div>
+              <div class="l">Avg setup time</div>
+            </div>
+            <div class="m">
+              <div class="v">8.5<span style="font-size: 1rem;">/10</span></div>
+              <div class="l">NPS score</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="intro-p">For the final stakeholder presentation, I proposed a before-and-after slide that put Round 1 and Round 2 metrics side by side, and I chose which metrics to highlight. This was deliberate. The team had acted on our Round 1 recommendations in good faith, and I wanted the presentation to visibly credit them for doing so. <strong>Stakeholders who see their decisions validated by research are more likely to commission more research</strong> — that's as much a research operations decision as it is a communication one.</p>
+    </section>
+
+    <section class="case-section" id="reflection">
+      <span class="section-num">06 · Reflection</span>
+      <h2>Lessons I <em>carry forward.</em></h2>
+      <p class="intro-p">Every project teaches you something about the craft. Here are the lessons I carry forward from Safemo — alongside honest callouts in the margin.</p>
+
+      <div class="reflection-wrap">
+        <div>
+          <p class="intro-p">The biggest lesson from Safemo is that <strong>research operations is a craft of small, deliberate choices, not a set of administrative tasks</strong>. Every decision I made about framing, presentation structure, and which metrics to put on the final slide was shaping how the findings would land with the team. None of those choices were in the research plan. They came out of paying attention to the stakeholders as carefully as we paid attention to the users.</p>
+          <p class="intro-p">I also learned that <strong>validation is its own kind of contribution</strong>. Round 2 could have felt like execution work, but owning it end-to-end taught me that the second round of a longitudinal study is where you find out whether your framing was actually right. That's as close to research feedback as you get, and it changes how you design the next study.</p>
+        </div>
+        <div class="callouts">
+          <div class="callout">
+            <span class="kind">On synthesis</span>
+            <p>The rainbow spreadsheet was the right call for this study size, but I'd pair it with a qualitative coding tool next time to preserve more of the individual voice.</p>
+          </div>
+          <div class="callout">
+            <span class="kind">On stakeholders</span>
+            <p>The before-and-after slide was the most-referenced artifact in the final meeting. Visual framing of validation matters as much as the validation itself.</p>
+          </div>
+          <div class="callout placeholder">
+            <span class="kind">Placeholder</span>
+            <p>Add one more reflection here — something specific you'd do differently on a similar project</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<section class="next-project">
+  <div class="container">
+    <div>
+      <div class="eyebrow">Next case study</div>
+      <h2>Finding product-market fit under a <em>2-week deadline.</em></h2>
+      <p>How I led a full research program for a travel startup whose assumptions had been torn apart by a business competition jury — and helped shape an investor pitch that secured early funding.</p>
+      <a href="tripal.html" class="btn btn-primary">Read Tripal case study <span class="arrow">→</span></a>
+    </div>
+    <a href="tripal.html" class="visual">
+      <h3>Tripal</h3>
+      <p class="sub">Full research cycle · 2 months · 2nd place at business competition</p>
+      <div class="decor"></div>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-intro">
+      <h3>Daniel Li.</h3>
+      <p class="tagline">UX Researcher &amp; Research Operations practitioner. Making research feel human, one decision at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Projects</h4>
+      <ul>
+        <li><a href="safemo.html">Safemo</a></li>
+        <li><a href="tripal.html">Tripal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Email</a></li>
+        <li><a href="#">Resume (PDF)</a></li>
+      </ul>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Daniel Li · Built with care in Los Angeles</span>
+      <span>Set in Besley, Figtree &amp; JetBrains Mono</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
