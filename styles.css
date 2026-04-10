@@ -30,7 +30,7 @@
   /* Typography */
   --font-display: 'Besley', Georgia, serif;
   --font-body:    'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --font-mono:    'Figtree', 'Courier New', monospace;
 
   /* Scale */
   --radius-sm: 4px;

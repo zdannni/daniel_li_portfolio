@@ -218,10 +218,214 @@
     line-height: 1.3;
   }
 
+  /* -------- What I'm Digesting -------- */
+  .digesting-section {
+    padding: 100px 0;
+    background: var(--bg-alt);
+  }
+  .digesting-category {
+    margin-bottom: 56px;
+  }
+  .digesting-category:last-child { margin-bottom: 0; }
+  .digesting-category-header {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 20px;
+    align-items: baseline;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .digesting-category-header .cat-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .digesting-category-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0;
+  }
+  .digesting-category-header h3 em {
+    color: var(--primary);
+    font-style: italic;
+  }
+  .digesting-category-header .cat-count {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .digesting-items {
+    display: grid;
+    gap: 20px;
+  }
+
+  /* Each category gets its own item shape */
+  .digesting-items.books { grid-template-columns: repeat(4, 1fr); }
+  .digesting-items.podcasts { grid-template-columns: repeat(4, 1fr); }
+  .digesting-items.music { grid-template-columns: repeat(4, 1fr); }
+  .digesting-items.film { grid-template-columns: repeat(3, 1fr); }
+
+  .dig-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .dig-item:hover { transform: translateY(-3px); }
+
+  /* Book items: tall rectangles */
+  .dig-item.book .cover {
+    aspect-ratio: 2 / 3;
+    border-radius: 2px 6px 6px 2px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+    box-shadow: inset 2px 0 0 rgba(0, 0, 0, 0.2);
+  }
+  .dig-item.book .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 14px,
+      rgba(255, 255, 255, 0.04) 14px,
+      rgba(255, 255, 255, 0.04) 15px
+    );
+  }
+
+  /* Podcast items: circles */
+  .dig-item.podcast .cover {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dig-item.podcast .cover::before {
+    content: '';
+    position: absolute;
+    inset: 20%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .dig-item.podcast .cover::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14%;
+    height: 14%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Music items: squares */
+  .dig-item.music .cover {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .dig-item.music .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(0,0,0,0.12) 0%, transparent 50%);
+  }
+
+  /* Film items: wide rectangles */
+  .dig-item.film .cover {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .dig-item.film .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 50%);
+  }
+  .dig-item.film .cover::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.35);
+  }
+
+  /* Color variations per item (so placeholders are visually varied) */
+  .dig-item.book:nth-child(1) .cover { background: var(--primary-deep); }
+  .dig-item.book:nth-child(2) .cover { background: var(--accent-dark); }
+  .dig-item.book:nth-child(3) .cover { background: var(--primary-dark); }
+  .dig-item.book:nth-child(4) .cover { background: #5a4a38; }
+
+  .dig-item.podcast:nth-child(1) .cover { background: var(--primary); }
+  .dig-item.podcast:nth-child(2) .cover { background: var(--accent); }
+  .dig-item.podcast:nth-child(3) .cover { background: var(--primary-deep); }
+  .dig-item.podcast:nth-child(4) .cover { background: var(--primary-dark); }
+
+  .dig-item.music:nth-child(1) .cover { background: var(--accent-dark); }
+  .dig-item.music:nth-child(2) .cover { background: var(--primary-dark); }
+  .dig-item.music:nth-child(3) .cover { background: var(--primary-deep); }
+  .dig-item.music:nth-child(4) .cover { background: var(--accent); }
+
+  .dig-item.film:nth-child(1) .cover { background: var(--primary-deep); }
+  .dig-item.film:nth-child(2) .cover { background: var(--primary-dark); }
+  .dig-item.film:nth-child(3) .cover { background: var(--accent-dark); }
+
+  .dig-item .dig-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .dig-item .dig-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+  .dig-item.placeholder .dig-title { color: var(--ink-3); font-style: italic; }
+  .dig-item.placeholder .dig-meta::before { content: "+ "; color: var(--primary); }
+
+  @media (max-width: 900px) {
+    .digesting-section { padding: 72px 0; }
+    .digesting-items.books,
+    .digesting-items.podcasts,
+    .digesting-items.music { grid-template-columns: repeat(2, 1fr); }
+    .digesting-items.film { grid-template-columns: 1fr; }
+    .digesting-category-header { grid-template-columns: 32px 1fr; }
+    .digesting-category-header .cat-count { display: none; }
+    .digesting-category-header h3 { font-size: 1.375rem; }
+  }
+
   /* -------- Education / Timeline -------- */
   .edu-section {
     padding: 100px 0;
-    background: var(--bg-alt);
   }
   .edu-section .container {
     display: grid;
@@ -392,9 +596,9 @@
   <div class="container">
     <div class="text">
       <div class="eyebrow">About me</div>
-      <h1>Research is a <em>craft.</em> I treat it that way.</h1>
-      <p class="lede">I'm Daniel, a UX Researcher and Research Operations practitioner based in Los Angeles. I help product teams turn messy, ambiguous questions into research that stakeholders trust enough to act on.</p>
-      <p class="lede">My path into research came through caring about people and being allergic to research that sits unread. I studied Cognitive Science at UC San Diego and earned a Master's in Information from the University of Michigan, where I learned that methods are the easy part — it's the judgment underneath them that makes research useful.</p>
+      <h1>Hi, I'm <em>Daniel.</em></h1>
+      <p class="lede">I'm a UX Researcher based in Los Angeles, with an MS in Information from the University of Michigan and a BS in Cognitive Science from UC San Diego.</p>
+      <p class="lede">This page is for the things a resume cannot hold: how I think, how I work, and what I'm consuming right now.</p>
     </div>
     <div class="portrait-frame">
       <div class="decor-a"></div>
@@ -410,17 +614,6 @@
   </div>
 </section>
 
-<!-- ============ BIO ============ -->
-<section class="bio-section">
-  <div class="container">
-    <h2>A short <em>biography.</em></h2>
-    <p>I came to user research through a winding path. I studied <strong>Cognitive Science</strong> at UC San Diego because I was interested in how people make decisions under uncertainty, and I continued at <strong>the University of Michigan</strong> where I specialized in UX research and research methods. Along the way, I learned that the most interesting research problems live at the edges — where a team's assumptions meet the messy reality of how people actually think, and where what a product claims to offer meets what users actually experience.</p>
-    <p>My Safemo internship taught me what research operations actually means. It's not administration — it's the sum of small, deliberate choices about how research gets framed, who it speaks to, and how it lands with the people who have to act on it. I proposed the rainbow-spreadsheet synthesis approach, the product-market fit versus usability framing, and the chronological presentation that mirrored how users actually experienced the setup process. None of those were spelled out in the research plan; they were judgment calls made in service of the team making better decisions.</p>
-    <p>My Tripal capstone taught me what it means to own a full research cycle under real time pressure — scoping, method selection, interviewing, synthesizing, facilitating a design sprint, and watching the research hold its weight in front of real investors. The research placed second at a business competition and helped the team secure early funding. That outcome mattered to me less than what the project taught me about translation: research is only as useful as the translation between what you find and what the team can act on.</p>
-    <p>I write, speak, and work in both English and Mandarin, which means I can bridge research practice between US and Chinese product teams — something I care about increasingly as more of the interesting product work happens across that bridge.</p>
-  </div>
-</section>
-
 <!-- ============ APPROACH ============ -->
 <section class="approach-deep">
   <div class="container">
@@ -433,7 +626,7 @@
         <span class="accent-line"></span>
         <span class="num">01 / Scoping</span>
         <h3>The framing decision is the research decision.</h3>
-        <p>A research question phrased one way is tractable; phrased another way it's impossible. The most consequential choice I make on any project happens before I open a doc — it's deciding which version of the question the research is actually going to answer.</p>
+        <p>A research question phrased one way is tractable; phrased another way it's impossible. The most consequential choice I make on any project happens before I open a doc: deciding which version of the question the research is actually going to answer.</p>
       </div>
       <div class="approach-tile">
         <span class="accent-line"></span>
@@ -451,7 +644,7 @@
         <span class="accent-line"></span>
         <span class="num">04 / Communication</span>
         <h3>How a finding lands is part of the research.</h3>
-        <p>Research that stakeholders can't act on is research that hasn't done its job. I design presentations the same way I design studies — with a theory about how people will encounter the findings and what they need in order to make decisions from them.</p>
+        <p>Research that stakeholders can't act on is research that hasn't done its job. I design presentations the same way I design studies, with a theory about how people will encounter the findings and what they need in order to make decisions from them.</p>
       </div>
     </div>
   </div>
@@ -517,6 +710,135 @@
   </div>
 </section>
 
+<!-- ============ WHAT I'M DIGESTING ============ -->
+<section class="digesting-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Currently digesting</div>
+      <h2>What's on my plate <em>right now.</em></h2>
+    </div>
+
+    <!-- Books -->
+    <div class="digesting-category">
+      <div class="digesting-category-header">
+        <span class="cat-num">01</span>
+        <h3>Books I'm <em>reading</em></h3>
+        <span class="cat-count">04 items</span>
+      </div>
+      <div class="digesting-items books">
+        <div class="dig-item book placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Book title placeholder</div>
+          <div class="dig-meta">Add author</div>
+        </div>
+        <div class="dig-item book placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Book title placeholder</div>
+          <div class="dig-meta">Add author</div>
+        </div>
+        <div class="dig-item book placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Book title placeholder</div>
+          <div class="dig-meta">Add author</div>
+        </div>
+        <div class="dig-item book placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Book title placeholder</div>
+          <div class="dig-meta">Add author</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Podcasts -->
+    <div class="digesting-category">
+      <div class="digesting-category-header">
+        <span class="cat-num">02</span>
+        <h3>Podcasts in <em>heavy rotation</em></h3>
+        <span class="cat-count">04 items</span>
+      </div>
+      <div class="digesting-items podcasts">
+        <div class="dig-item podcast placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Show title placeholder</div>
+          <div class="dig-meta">Add host / network</div>
+        </div>
+        <div class="dig-item podcast placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Show title placeholder</div>
+          <div class="dig-meta">Add host / network</div>
+        </div>
+        <div class="dig-item podcast placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Show title placeholder</div>
+          <div class="dig-meta">Add host / network</div>
+        </div>
+        <div class="dig-item podcast placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Show title placeholder</div>
+          <div class="dig-meta">Add host / network</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Music -->
+    <div class="digesting-category">
+      <div class="digesting-category-header">
+        <span class="cat-num">03</span>
+        <h3>Music on <em>repeat</em></h3>
+        <span class="cat-count">04 items</span>
+      </div>
+      <div class="digesting-items music">
+        <div class="dig-item music placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Album or track placeholder</div>
+          <div class="dig-meta">Add artist</div>
+        </div>
+        <div class="dig-item music placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Album or track placeholder</div>
+          <div class="dig-meta">Add artist</div>
+        </div>
+        <div class="dig-item music placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Album or track placeholder</div>
+          <div class="dig-meta">Add artist</div>
+        </div>
+        <div class="dig-item music placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Album or track placeholder</div>
+          <div class="dig-meta">Add artist</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Film / TV -->
+    <div class="digesting-category">
+      <div class="digesting-category-header">
+        <span class="cat-num">04</span>
+        <h3>Screens worth <em>watching</em></h3>
+        <span class="cat-count">03 items</span>
+      </div>
+      <div class="digesting-items film">
+        <div class="dig-item film placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Film or show placeholder</div>
+          <div class="dig-meta">Add director / year</div>
+        </div>
+        <div class="dig-item film placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Film or show placeholder</div>
+          <div class="dig-meta">Add director / year</div>
+        </div>
+        <div class="dig-item film placeholder">
+          <div class="cover"></div>
+          <div class="dig-title">Film or show placeholder</div>
+          <div class="dig-meta">Add director / year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ EDUCATION ============ -->
 <section class="edu-section">
   <div class="container">
@@ -548,10 +870,10 @@
   <div class="container">
     <div class="inner">
       <h2>What I'm <em>looking for.</em></h2>
-      <p>I'm actively looking for UX Research and Research Operations roles where the craft matters — teams that care about rigor, care about translation, and care about the people on both ends of the study. I'm open to in-person, hybrid, and remote, and I'm targeting both the US and Beijing markets.</p>
+      <p>I'm actively looking for UX Research and Research Operations roles on teams that care about rigor and about the people on both ends of a study. I'm open to in-person, hybrid, and remote work, and I'm targeting both US and Beijing markets.</p>
       <p>If you're building a research practice and you've read this far, I'd love to talk.</p>
       <div class="cta-row">
-        <a href="mailto:your.email@example.com" class="btn btn-primary">Send an email <span class="arrow">→</span></a>
+        <a href="/cdn-cgi/l/email-protection#a5dccad0d78bc0c8c4ccc9e5c0ddc4c8d5c9c08bc6cac8" class="btn btn-primary">Send an email <span class="arrow">→</span></a>
         <a href="#" class="btn btn-secondary">Download resume (PDF)</a>
       </div>
       <div class="decor-a"></div>
@@ -565,7 +887,7 @@
   <div class="container">
     <div class="footer-intro">
       <h3>Daniel Li.</h3>
-      <p class="tagline">UX Researcher &amp; Research Operations practitioner. Making research feel human, one decision at a time.</p>
+      <p class="tagline">UX Researcher &amp; Research Operations practitioner. Based in Los Angeles.</p>
     </div>
     <div class="footer-col">
       <h4>Navigate</h4>
@@ -593,9 +915,4 @@
     <div class="colophon">
       <span>© 2026 Daniel Li · Built with care in Los Angeles</span>
       <span>Set in Besley, Figtree &amp; JetBrains Mono</span>
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
+  
