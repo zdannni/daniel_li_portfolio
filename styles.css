@@ -53,6 +53,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -103,7 +104,7 @@ p:last-child { margin-bottom: 0; }
 
 .mono-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -115,7 +116,7 @@ p:last-child { margin-bottom: 0; }
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -173,7 +174,7 @@ p:last-child { margin-bottom: 0; }
 }
 .nav-links a {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -221,7 +222,7 @@ p:last-child { margin-bottom: 0; }
 }
 .site-footer .footer-col h4 {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -242,7 +243,7 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(239, 236, 223, 0.5);
@@ -313,7 +314,7 @@ section { position: relative; }
   .container, .container-narrow { padding: 0 24px; }
   .nav { padding: 18px 24px; }
   .nav-links { gap: 22px; }
-  .nav-links a { font-size: 10px; }
+  .nav-links a { font-size: 11px; }
   .site-footer { padding: 60px 0 30px; }
   .site-footer .container {
     grid-template-columns: 1fr 1fr;

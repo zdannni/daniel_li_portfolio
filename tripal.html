@@ -4,16 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tripal — Daniel Li</title>
-<meta name="description" content="A full research program that turned a jury's critique into an investor pitch. 12 interviews, 330 survey responses, two design sprints, and a second-place finish at a business competition.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="A full research program that turned a startup's torn-apart pitch into product-market fit clarity, in time for a real investor presentation.">
+<link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="case-study.css">
 <style>
   /* ==============================================================
-     TRIPAL-SPECIFIC COMPONENTS
+     TRIPAL-SPECIFIC OVERRIDES & COMPONENTS
      ============================================================== */
+
+  /* ---- 4-metric hero strip ---- */
+  .hero-metrics .strip {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 40px;
+  }
+  @media (min-width: 860px) {
+    .hero-metrics .strip {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 
   /* -------- Judge Feedback Panel -------- */
   .judge-panel {
@@ -27,10 +36,8 @@
   }
   .judge-panel .panel-bg-a {
     position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 280px;
-    height: 280px;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
     border-radius: 50%;
     background: var(--primary);
     opacity: 0.18;
@@ -38,18 +45,15 @@
   }
   .judge-panel .panel-bg-b {
     position: absolute;
-    bottom: -60px;
-    left: -60px;
-    width: 160px;
-    height: 160px;
+    bottom: -60px; left: -60px;
+    width: 160px; height: 160px;
     border-radius: 50%;
     background: var(--accent);
     opacity: 0.16;
     pointer-events: none;
   }
   .judge-panel .panel-head {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -57,7 +61,7 @@
     gap: 16px;
     margin-bottom: 32px;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(239, 236, 223, 0.18);
+    border-bottom: 1px solid rgba(239,236,223,0.18);
   }
   .judge-panel .panel-label {
     font-family: var(--font-mono);
@@ -74,20 +78,16 @@
     line-height: 1.2;
     max-width: 520px;
   }
-  .judge-panel .panel-title em {
-    color: var(--accent);
-    font-style: italic;
-  }
+  .judge-panel .panel-title em { color: var(--accent); font-style: italic; }
   .judge-panel .quotes {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
   }
   .judge-panel .jq {
-    background: rgba(239, 236, 223, 0.05);
-    border: 1px solid rgba(239, 236, 223, 0.12);
+    background: rgba(239,236,223,0.05);
+    border: 1px solid rgba(239,236,223,0.12);
     border-radius: var(--radius-md);
     padding: 22px 24px;
     position: relative;
@@ -95,8 +95,7 @@
   .judge-panel .jq::before {
     content: "\201C";
     position: absolute;
-    top: 2px;
-    left: 14px;
+    top: 2px; left: 14px;
     font-family: var(--font-display);
     font-size: 2.5rem;
     color: var(--accent);
@@ -105,37 +104,313 @@
   }
   .judge-panel .jq p {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 14px;
     line-height: 1.55;
-    color: rgba(239, 236, 223, 0.88);
+    color: rgba(239,236,223,0.88);
     margin: 10px 0 12px;
+
   }
   .judge-panel .jq .jq-from {
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(212, 165, 116, 0.8);
+    color: rgba(212,165,116,0.8);
   }
   .judge-panel .panel-foot {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     margin-top: 32px;
     padding-top: 24px;
-    border-top: 1px dashed rgba(239, 236, 223, 0.18);
+    border-top: 1px dashed rgba(239,236,223,0.18);
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 15px;
-    color: rgba(239, 236, 223, 0.75);
+    color: rgba(239,236,223,0.75);
     max-width: 640px;
   }
 
-  /* -------- Deferred Insight Callout (for trade-off story) -------- */
+  /* -------- Three Open Questions list -------- */
+  .open-questions {
+    margin: 32px 0 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .open-questions li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    align-items: start;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .open-questions li .q-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    font-weight: 600;
+    padding-top: 5px;
+  }
+
+  /* -------- Phase Stack (Research Strategy section) -------- */
+  .timeline-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 40px 0 36px;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .timeline-bar .tb-phase {
+    flex: 1;
+    padding: 14px 18px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .timeline-bar .tb-phase:last-child { border-right: none; }
+  .timeline-bar .tb-phase .tb-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .timeline-bar .tb-phase .tb-week {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  .phase-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 0 48px;
+  }
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .phase-row .pr-content {
+    padding: 28px 32px;
+    border-right: 1px solid var(--border);
+  }
+  .phase-row .pr-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .phase-row .pr-content h4 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .phase-row .pr-duration {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .phase-row .pr-content p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  /* Sub-sections within phase cards */
+  .pr-section {
+    margin-bottom: 16px;
+  }
+  .pr-section:last-child { margin-bottom: 0; }
+  .pr-section-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 5px;
+    display: block;
+  }
+  .pr-section p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    color: var(--ink-2) !important;
+    margin: 0 !important;
+  }
+  .pr-section.pr-highlight {
+    background: var(--bg-alt);
+    border-left: 2px solid var(--primary);
+    padding: 10px 14px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-top: 4px;
+  }
+  .pr-section.pr-highlight .pr-section-label { color: var(--primary-dark); }
+  /* Phase card lists and callout */
+  .pr-group { margin-bottom: 14px; }
+  .pr-group:last-child { margin-bottom: 0; }
+  .pr-list {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .pr-list li {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    padding-left: 16px;
+    position: relative;
+  }
+  .pr-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    opacity: 0.7;
+    font-size: 11px;
+    top: 1px;
+  }
+  .pr-callout {
+    margin-top: 16px;
+    background: var(--bg-alt);
+    border-left: 2px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .pr-callout p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0;
+    font-family: var(--font-display);
+  }
+  /* Design Sprint — visually differentiated (dark) */
+  .phase-row-sprint {
+    background: var(--primary-deep);
+    border-color: var(--primary-deep);
+  }
+  .phase-row-sprint .pr-content {
+    border-right-color: rgba(239,236,223,0.14);
+  }
+  .phase-row-sprint .pr-num { color: var(--accent); }
+  .phase-row-sprint .pr-content h4 { color: var(--bg-alt); }
+  .phase-row-sprint .pr-duration { color: rgba(239,236,223,0.45); }
+  .phase-row-sprint .pr-section-label { color: var(--accent); }
+  .phase-row-sprint .pr-section p { color: rgba(239,236,223,0.78) !important; }
+  .phase-row-sprint .pr-section.pr-highlight {
+    background: rgba(239,236,223,0.06);
+    border-left-color: var(--accent);
+  }
+  .phase-row-sprint .pr-section.pr-highlight .pr-section-label { color: var(--accent); }
+  .phase-row-sprint .pr-visual {
+    background: rgba(0,0,0,0.22);
+    color: rgba(239,236,223,0.4);
+  }
+  .phase-row .pr-visual {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 0;
+  }
+  .phase-row .pr-visual img {
+    flex: 1;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 0;
+  }
+  .phase-row .pr-visual img + img {
+    border-top: 1px solid var(--border);
+  }
+
+  /* -------- Findings: Landscape section -------- */
+  .movement-heading {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 56px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .landscape-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 0 0 40px;
+  }
+  .landscape-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 30px;
+    position: relative;
+  }
+  .landscape-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 30px;
+    width: 24px; height: 3px;
+    background: var(--primary);
+    border-radius: 0 0 2px 2px;
+  }
+  .landscape-card h4 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .landscape-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* -------- Findings: Bridge sentence -------- */
+  .findings-bridge {
+    margin: 40px 0 32px;
+    padding: 24px 30px;
+    background: var(--bg-alt);
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    border-left: 3px solid var(--border-strong);
+  }
+
+  /* -------- Trade-off Callout -------- */
   .trade-off-callout {
     margin: 48px 0 32px;
     background: var(--bg-apricot);
-    border: 1px solid rgba(166, 120, 64, 0.22);
+    border: 1px solid rgba(166,120,64,0.22);
     border-radius: var(--radius-lg);
     padding: 32px 36px;
     display: grid;
@@ -144,8 +419,7 @@
     align-items: start;
   }
   .trade-off-callout .icon-frame {
-    width: 52px;
-    height: 52px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     background: var(--accent);
     display: flex;
@@ -174,168 +448,77 @@
   }
   .trade-off-callout p + p { margin-top: 8px; }
 
-  /* -------- Feature Gallery -------- */
+  /* -------- Feature Gallery (alternating video strips) -------- */
   .feature-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
     margin: 48px 0 32px;
-  }
-  .feature-card {
-    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 0;
     overflow: hidden;
-    transition: transform 0.3s ease, border-color 0.3s ease;
   }
-  .feature-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--primary);
+  .feature-card {
+    display: grid;
+    grid-template-columns: 68% 32%;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card);
   }
+  .feature-card:last-child { border-bottom: none; }
+  /* Even cards: flip columns so video always lands in the 68% slot */
+  .feature-card:nth-child(even) { grid-template-columns: 32% 68%; }
+  .feature-card:nth-child(even) .visual { order: 2; }
+  .feature-card:nth-child(even) .content { order: 1; border-left: none; border-right: 1px solid var(--border); }
   .feature-card .visual {
-    background: var(--bg-alt);
-    height: 180px;
+    height: 620px;
+    background: var(--primary-dark);
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
   }
-  .feature-card .visual svg {
-    width: 72px;
-    height: 72px;
-    color: var(--primary);
+  .feature-card .visual video {
+    height: 620px;
+    width: auto;
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
   }
-  .feature-card .visual .bg-shape {
-    position: absolute;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: var(--bg-sage);
-    opacity: 0.7;
-  }
-  .feature-card .content {
-    padding: 22px 26px 26px;
+.feature-card .content {
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-left: 1px solid var(--border);
+    background: var(--bg-alt);
   }
   .feature-card .nugget-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--primary);
-    background: var(--bg-sage);
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-    margin-bottom: 14px;
-  }
-  .feature-card h4 {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 8px;
-    line-height: 1.2;
-  }
-  .feature-card p {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--ink-2);
-    margin: 0;
-  }
-
-  /* -------- Outcome Block -------- */
-  .outcome-block {
-    margin: 48px 0;
-    background: var(--primary-deep);
-    color: var(--bg);
-    border-radius: var(--radius-xl);
-    padding: 56px 56px 48px;
-    position: relative;
-    overflow: hidden;
-  }
-  .outcome-block .ob-decor-a {
-    position: absolute;
-    top: -80px;
-    right: -60px;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.22;
-  }
-  .outcome-block .ob-decor-b {
-    position: absolute;
-    bottom: -40px;
-    right: 120px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: var(--primary);
-    opacity: 0.28;
-  }
-  .outcome-block .ob-label {
     font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-    position: relative;
-    z-index: 1;
-  }
-  .outcome-block h3 {
-    font-family: var(--font-display);
-    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    letter-spacing: 0.04em;
     font-weight: 500;
-    color: var(--bg);
-    line-height: 1.1;
-    max-width: 620px;
-    margin-bottom: 14px;
-    position: relative;
-    z-index: 1;
+    color: var(--primary-dark);
+    background: var(--bg-sage);
+    border: 1px solid rgba(107, 128, 87, 0.22);
+    padding: 5px 11px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 6px;
   }
-  .outcome-block h3 em {
-    color: var(--accent);
-    font-style: italic;
-  }
-  .outcome-block .ob-lede {
+  .feature-card .nugget-link:last-of-type { margin-bottom: 14px; }
+  .feature-card h4 {
     font-family: var(--font-display);
-    font-size: 16px;
-    line-height: 1.55;
-    color: rgba(239, 236, 223, 0.72);
-    max-width: 580px;
-    margin-bottom: 40px;
-    font-style: italic;
-    position: relative;
-    z-index: 1;
-  }
-  .outcome-block .ob-metrics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(239, 236, 223, 0.18);
-    position: relative;
-    z-index: 1;
-  }
-  .outcome-block .ob-metric .big {
-    font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 1.4rem;
     font-weight: 500;
-    color: var(--accent);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    line-height: 1.15;
   }
-  .outcome-block .ob-metric .lbl {
-    font-size: 13px;
-    line-height: 1.5;
-    color: rgba(239, 236, 223, 0.75);
-    max-width: 240px;
+  .feature-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0;
   }
 
   /* -------- Usability mini-block -------- */
@@ -368,22 +551,191 @@
     margin: 0;
   }
 
+  /* -------- Outcome Block -------- */
+  .outcome-block {
+    margin: 48px 0;
+    background: var(--primary-deep);
+    color: var(--bg);
+    border-radius: var(--radius-xl);
+    padding: 56px 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .outcome-block .ob-decor-a {
+    position: absolute;
+    top: -80px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.22;
+  }
+  .outcome-block .ob-decor-b {
+    position: absolute;
+    bottom: -40px; right: 120px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.28;
+  }
+  .outcome-block .ob-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .outcome-block h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    font-weight: 500;
+    color: var(--bg);
+    line-height: 1.1;
+    max-width: 620px;
+    margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .outcome-block h3 em { color: var(--accent); font-style: italic; }
+  .outcome-block .ob-lede {
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(239,236,223,0.72);
+    max-width: 580px;
+    margin-bottom: 40px;
+    position: relative; z-index: 1;
+  }
+  .outcome-block .ob-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(239,236,223,0.18);
+    position: relative; z-index: 1;
+  }
+  .outcome-block .ob-metric .big {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .outcome-block .ob-metric .lbl {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(239,236,223,0.75);
+    max-width: 240px;
+  }
+
+  /* -------- Reflection: full-width callouts -------- */
+  .reflection-callouts {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .reflection-callouts .callout {
+    padding: 28px 32px;
+  }
+  .reflection-callouts .callout p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
   /* -------- Responsive -------- */
   @media (max-width: 980px) {
     .judge-panel { padding: 40px 32px 36px; }
     .judge-panel .quotes { grid-template-columns: 1fr; }
     .trade-off-callout { grid-template-columns: 1fr; padding: 28px; }
     .trade-off-callout .icon-frame { margin-bottom: 4px; }
-    .feature-gallery { grid-template-columns: 1fr; }
+    .landscape-cards { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; }
+    .phase-row .pr-content { border-right: none; border-bottom: 1px solid var(--border); }
+    .phase-row .pr-visual { min-height: 120px; }
+    .feature-card { grid-template-columns: 1fr !important; }
+    .feature-card .visual,
+    .feature-card .visual video { height: 320px; }
+    .feature-card .visual { order: 0 !important; }
+    .feature-card .content { order: 1 !important; border-left: none !important; border-right: none !important; border-top: 1px solid var(--border); padding: 28px 24px; }
     .outcome-block { padding: 40px 32px 36px; }
     .outcome-block .ob-metrics { grid-template-columns: 1fr; gap: 24px; }
     .outcome-block .ob-metric .big { font-size: 2.25rem; }
+    .timeline-bar { flex-direction: column; border-radius: var(--radius-lg); }
+    .timeline-bar .tb-phase { border-right: none; border-bottom: 1px solid var(--border); }
+    .timeline-bar .tb-phase:last-child { border-bottom: none; }
   }
   @media (max-width: 600px) {
     .judge-panel .panel-title { font-size: 1.25rem; }
-    .feature-card .visual { height: 140px; }
-    .feature-card .visual svg { width: 56px; height: 56px; }
+    .open-questions li { font-size: 15px; }
+    .outcome-block .ob-metric .big { font-size: 2rem; }
   }
+
+  /* -------- Lightbox -------- */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(29, 41, 35, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    cursor: zoom-out;
+  }
+  .lightbox.is-open { display: flex; }
+  .lightbox img {
+    max-width: min(90vw, 1100px);
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+    cursor: default;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 28px;
+    background: none;
+    border: none;
+    color: rgba(239,236,223,0.7);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: color 0.15s;
+  }
+  .lightbox-close:hover { color: var(--bg); }
+
+  /* Clickable hint on research images */
+  .phase-row .pr-visual img {
+    cursor: zoom-in;
+    transition: opacity 0.18s;
+  }
+  .phase-row .pr-visual img:hover { opacity: 0.88; }
+
+  /* ---- Next project: Safemo card visual ---- */
+  .next-project .visual {
+    background-image: url('assets/safemo/safemo-case-study-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .next-project .visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(45, 58, 35, 0.60);
+    border-radius: inherit;
+    z-index: 0;
+    transition: opacity 0.4s ease;
+  }
+  .next-project .visual:hover::before { opacity: 0; }
+  .next-project .visual > * { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
@@ -395,6 +747,7 @@
       <a href="index.html" class="active">Work</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="#">Resume</a>
     </div>
   </nav>
 </header>
@@ -414,9 +767,10 @@
     <div class="hero-meta">
       <div class="meta-row"><span class="meta-key">Client</span><span class="meta-val">Tripal · travel startup</span></div>
       <div class="meta-row"><span class="meta-key">My role</span><span class="meta-val">Research Lead, full cycle owner</span></div>
-      <div class="meta-row"><span class="meta-key">Context</span><span class="meta-val">U-Michigan SI699 Capstone</span></div>
-      <div class="meta-row"><span class="meta-key">Timeline</span><span class="meta-val">Fall 2024 · 2 months</span></div>
+      <div class="meta-row"><span class="meta-key">Timeline</span><span class="meta-val">Aug 2025 to Nov 2025</span></div>
       <div class="meta-row"><span class="meta-key">Methods</span><span class="meta-val">Interviews, survey, design sprint, usability</span></div>
+      <div class="meta-row"><span class="meta-key">Team</span><span class="meta-val">Product Manager, Engineers, UX Designers</span></div>
+
     </div>
   </div>
 
@@ -428,7 +782,7 @@
       </div>
       <div class="big-metric">
         <div class="num">330</div>
-        <div class="label">Survey responses<br>quant validation</div>
+        <div class="label">Survey responses<br>exploratory quant</div>
       </div>
       <div class="big-metric">
         <div class="num">2<em>nd</em></div>
@@ -449,11 +803,11 @@
   <aside class="case-nav">
     <span class="label">Contents</span>
     <ol>
-      <li><a href="#hook">Overview</a></li>
-      <li><a href="#challenge">The Challenge</a></li>
-      <li><a href="#approach">My Approach</a></li>
-      <li><a href="#insights">Key Findings</a></li>
-      <li><a href="#impact">Impact</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#challenge">The Research Challenge</a></li>
+      <li><a href="#strategy">Research Strategy</a></li>
+      <li><a href="#findings">Findings</a></li>
+      <li><a href="#features">From Findings to Features</a></li>
       <li><a href="#reflection">Reflection</a></li>
     </ol>
   </aside>
@@ -461,19 +815,19 @@
   <main class="case-main">
 
     <!-- SECTION 1: OVERVIEW -->
-    <section class="case-section" id="hook">
+    <section class="case-section" id="overview">
       <span class="section-num">01 · Overview</span>
       <h2>A prototype without a <em>proven audience.</em></h2>
-      <p class="intro-p">Tripal was a travel-planning app built by a small startup team. They had a working prototype and a founder's personal conviction. What they did not have was a validated understanding of who the product was for, what moments it addressed, or why someone would adopt it over existing tools. A business competition jury had already torn those assumptions apart in front of them.</p>
-      <p class="intro-p">Over two months I designed and led a research program that answered the jury's questions, reshaped the feature set, and fed directly into an investor pitch. The team <strong>placed second at the competition</strong> and <strong>secured early investor funding</strong>. This case study is about owning a research cycle end to end when both the product question and the timeline are unforgiving.</p>
+      <p class="intro-p">Tripal was a travel-planning app built by a small startup team. They had a working prototype and a founder's personal conviction. What they did not have was a validated understanding of who the product was for, what moments it addressed, or why someone would adopt it over existing tools. A business competition jury had already exposed those gaps publicly.</p>
+      <p class="intro-p">Over two months, I designed and led the research program that built the product understanding the team was missing. The research shaped the feature set, informed the pitch, and the team placed second at the competition and secured early investor funding.</p>
     </section>
 
-    <!-- SECTION 2: CHALLENGE -->
+    <!-- SECTION 2: THE RESEARCH CHALLENGE -->
     <section class="case-section" id="challenge">
       <span class="section-num">02 · The Research Challenge</span>
-      <h2>A founder's frustration is not yet a <em>product thesis.</em></h2>
+      <h2>A prototype built on a <em>single person's frustration.</em></h2>
       <p class="intro-p">The team's idea came from a real experience. Planning a winter trip to Iceland with five friends across six countries had turned into a logistical nightmare of conflicting dates, buried recommendations, and budget disputes. The frustration was the spark, and the prototype was the first response.</p>
-      <p class="intro-p">When the team took the idea to a business startup competition, the judges' feedback was pointed and specific.</p>
+      <p class="intro-p">When the team took the idea to a business startup competition, the judges' feedback was pointed.</p>
 
       <div class="judge-panel">
         <div class="panel-bg-a"></div>
@@ -502,112 +856,194 @@
             <div class="jq-from">Judge D · on research depth</div>
           </div>
         </div>
-        <p class="panel-foot">Four judges, four concrete gaps. Target market, growth, monetization, and whether the team had actually talked to users. That is where the research came in.</p>
+        <p class="panel-foot">Four judges, four concrete gaps.</p>
       </div>
 
-      <p class="intro-p">I joined the team with a specific job. Answer the judges' questions with real evidence, validate or redirect the product direction, and produce enough clarity to justify a feature set in time for the investor pitch two weeks after the research concluded. The founder's Iceland story was real. It was also one person's experience. The research needed to tell us which parts of that frustration generalized, to whom, and in what specific moments.</p>
+      <p class="intro-p">The feedback made one thing clear: the team had built on unvalidated assumptions. They needed foundational research before they could pitch again. That is where I came in.</p>
+      <p class="intro-p">The product needed answers to three questions before anything else:</p>
+      <ol class="open-questions">
+        <li><span class="q-num">01</span><span><strong>Who is this product actually for?</strong></span></li>
+        <li><span class="q-num">02</span><span><strong>What specific problems should it solve?</strong></span></li>
+        <li><span class="q-num">03</span><span><strong>What should we build first, given a two-month deadline before the next pitch?</strong></span></li>
+      </ol>
     </section>
 
-    <!-- SECTION 3: APPROACH -->
-    <section class="case-section" id="approach">
-      <span class="section-num">03 · My Approach</span>
-      <h2>A sequence designed for <em>convergence.</em></h2>
-      <p class="intro-p">I designed the program as a deliberate sequence. Qualitative grounding first, quantitative validation second, synchronous team convergence third. Each phase earned the next.</p>
+    <!-- SECTION 3: RESEARCH STRATEGY -->
+    <section class="case-section" id="strategy">
+      <span class="section-num">03 · Research Strategy</span>
+      <h2>Four phases, from <em>divergence</em> to <em>convergence.</em></h2>
+      <p class="intro-p">I designed the research as a deliberate sequence. Desktop research mapped the landscape and identified the target user. Interviews surfaced the pain points that desktop research could not reveal. An exploratory survey tested whether those patterns held across a broader population and identified which traveler segment experienced the strongest friction. Two design sprint workshops converted insights into a feature set the team could build and pitch.</p>
 
-      <div class="process-timeline">
-        <div class="label">Research program structure · 2 months</div>
-        <div class="timeline-track four-phase">
-          <div class="phase">
-            <div class="phase-num">Phase 01</div>
-            <h4>Desktop research</h4>
-            <div class="duration">Week 1</div>
-            <ul>
-              <li>Industry reports (Euromonitor)</li>
-              <li>Academic research</li>
-              <li>Competitive landscape</li>
-              <li>Reddit qual sampling</li>
-            </ul>
-          </div>
-          <div class="phase">
-            <div class="phase-num">Phase 02</div>
-            <h4>Interviews</h4>
-            <div class="duration">Weeks 2 to 4</div>
-            <ul>
-              <li>12 in-depth interviews</li>
-              <li>Mixed solo &amp; group travelers</li>
-              <li>Diverse trip types</li>
-              <li>Saturation reached</li>
-            </ul>
-          </div>
-          <div class="phase">
-            <div class="phase-num">Phase 03</div>
-            <h4>Survey</h4>
-            <div class="duration">Weeks 5 to 6</div>
-            <ul>
-              <li>330 responses</li>
-              <li>Qual patterns tested at scale</li>
-              <li>Pain point prioritization</li>
-              <li>Attitudes toward AI in planning</li>
-            </ul>
-          </div>
-          <div class="phase">
-            <div class="phase-num">Phase 04</div>
-            <h4>Design sprint</h4>
-            <div class="duration">Weeks 7 to 8</div>
-            <ul>
-              <li>Two 3-hour workshops</li>
-              <li>Full team absorbed research</li>
-              <li>Converged on feature set</li>
-              <li><strong>I facilitated both</strong></li>
-            </ul>
-          </div>
+      <div class="timeline-bar">
+        <div class="tb-phase">
+          <div class="tb-name">Desktop Research</div>
+          <div class="tb-week">Week 1</div>
+        </div>
+        <div class="tb-phase">
+          <div class="tb-name">Interviews</div>
+          <div class="tb-week">Weeks 2–4</div>
+        </div>
+        <div class="tb-phase">
+          <div class="tb-name">Survey</div>
+          <div class="tb-week">Weeks 5–6</div>
+        </div>
+        <div class="tb-phase">
+          <div class="tb-name">Design Sprint</div>
+          <div class="tb-week">Weeks 7–8</div>
         </div>
       </div>
 
-      <h3>Key methodological choices I made</h3>
+      <div class="phase-stack">
 
-      <div class="decisions-grid">
-        <div class="decision-card">
-          <span class="kind">Sequencing</span>
-          <h4>Qualitative before quantitative, always.</h4>
-          <p>Running the survey before interviews would have meant guessing at what to measure. I used the interviews to surface what mattered, then used the survey to test whether those patterns held at scale. By the time I wrote the survey questions, the data had already told me which ones were worth asking.</p>
+        <div class="phase-row">
+          <div class="pr-content">
+            <span class="pr-num">Phase 01 · Week 1</span>
+            <h4>Desktop Research</h4>
+            <span class="pr-duration">Industry reports · competitive analysis · social listening</span>
+            <div class="pr-group">
+              <span class="pr-section-label">Goals</span>
+              <ul class="pr-list">
+                <li>Determine who the target user is</li>
+                <li>Map gaps and opportunities in the competitive landscape</li>
+                <li>Understand the end-to-end trip planning process</li>
+              </ul>
+            </div>
+            <div class="pr-group">
+              <span class="pr-section-label">What I did</span>
+              <ul class="pr-list">
+                <li>Reviewed industry reports on travel trends from the past three years (Euromonitor, McKinsey)</li>
+                <li>Monitored social conversations on r/travelertips</li>
+                <li>Reviewed research articles on trip planning behaviors and decision-making</li>
+                <li>Ran competitive analysis across existing travel planning tools</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pr-visual">
+            <img src="assets/tripal/tripal-desk-research-1.jpg" alt="Desk research — landscape analysis">
+            <img src="assets/tripal/tripal-desk-research-2.jpg" alt="Desk research — competitive mapping">
+          </div>
         </div>
-        <div class="decision-card">
-          <span class="kind">Sample sizing</span>
-          <h4>12 interviews was a saturation judgment.</h4>
-          <p>Twelve is not a magic number. It was the point at which I was hearing repeated themes rather than new ones, across a sample I had deliberately diversified by travel style, group size, and trip frequency. I treated saturation as a judgment call I could defend, not a rule I was following.</p>
+
+        <div class="phase-row">
+          <div class="pr-content">
+            <span class="pr-num">Phase 02 · Weeks 2–4</span>
+            <h4>In-depth Interviews (12 participants)</h4>
+            <span class="pr-duration">Semi-structured · ages 25–33 · solo &amp; group · domestic &amp; international</span>
+            <div class="pr-group">
+              <span class="pr-section-label">Goals</span>
+              <ul class="pr-list">
+                <li>Surface the specific moments, emotions, and trade-offs that produce real friction in trip planning</li>
+                <li>Understand how people handle unexpected disruptions during trips</li>
+              </ul>
+            </div>
+            <div class="pr-group">
+              <span class="pr-section-label">What I did</span>
+              <ul class="pr-list">
+                <li>Conducted 12 semi-structured interviews</li>
+                <li>Participants aged 25–33, 64% students, 37% full-time employed</li>
+                <li>Recruited for diversity in travel style (solo and group, domestic and international) and trip frequency</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pr-visual">
+            <img src="assets/tripal/tripal-interview-clusters.png" alt="Interview affinity clusters">
+          </div>
         </div>
-        <div class="decision-card">
-          <span class="kind">Format</span>
-          <h4>Design sprint instead of a research report.</h4>
-          <p>A report handed off to a distracted team two weeks before a pitch would not have produced alignment in time. The sprint forced synchronous absorption, collective ideation against the findings, and convergence on a feature set in the same room. Speed and alignment at the same time, which regular meetings cannot give you both of.</p>
+
+        <div class="phase-row">
+          <div class="pr-content">
+            <span class="pr-num">Phase 03 · Weeks 5–6</span>
+            <h4>Survey (n=330)</h4>
+            <span class="pr-duration">Exploratory · no predefined sample criteria · cluster analysis</span>
+            <div class="pr-group">
+              <span class="pr-section-label">Goals</span>
+              <ul class="pr-list">
+                <li>Test whether qualitative patterns hold across a broader population</li>
+                <li>Identify which traveler segments experience the strongest friction</li>
+              </ul>
+            </div>
+            <div class="pr-group">
+              <span class="pr-section-label">What I did</span>
+              <ul class="pr-list">
+                <li>Deployed a 330-response survey with no predefined sample criteria</li>
+                <li>Covered trip planning frequency, group coordination dynamics, budgeting approaches, and attitudes toward AI</li>
+                <li>Ran cluster analysis on five variables: age, travel budget, travel frequency, AI adoption rate, willingness to use AI</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pr-visual">
+            <img src="assets/tripal/tripal-survey.png" alt="Survey cluster visualization">
+          </div>
         </div>
-        <div class="decision-card">
-          <span class="kind">Facilitation</span>
-          <h4>Two sessions, not one.</h4>
-          <p>I split the sprint across two three-hour sessions because ideation benefits from a night of subconscious processing. Day one was research immersion and divergent ideation. Day two was critique and convergence. The split is what turned "lots of ideas" into "a small set we would actually build."</p>
+
+        <div class="phase-row">
+          <div class="pr-content">
+            <span class="pr-num">Phase 04 · Weeks 7–8</span>
+            <h4>Design Sprint</h4>
+            <span class="pr-duration">Two 3-hour workshops · full team (PM, engineers, designer) · I facilitated</span>
+            <div class="pr-group">
+              <span class="pr-section-label">Goals</span>
+              <ul class="pr-list">
+                <li>Quickly align expectations and product vision across teams</li>
+                <li>Converge on a buildable feature set before the investor pitch</li>
+              </ul>
+            </div>
+            <div class="pr-group">
+              <span class="pr-section-label">What I did</span>
+              <ul class="pr-list">
+                <li>Designed and facilitated two 3-hour workshops with the full team (PM, engineers, designer)</li>
+                <li>Day one: research immersion and divergent ideation. Day two: critique and feature selection.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pr-visual">
+            <img src="assets/tripal/tripal-design-sprint-1.png" alt="Design sprint workshop — day one">
+            <img src="assets/tripal/tripal-design-sprint-2.png" alt="Design sprint workshop — day two">
+          </div>
         </div>
+
       </div>
     </section>
 
-    <!-- SECTION 4: KEY FINDINGS -->
-    <section class="case-section" id="insights">
-      <span class="section-num">04 · Key Findings</span>
-      <h2>Three nuggets. Two drove features. One got <em>deferred.</em></h2>
-      <p class="intro-p">Three findings held up across both the interviews and the survey. Each one is captured below as an atomic research nugget: observation, evidence, and tags for severity, theme, and phase of the travel journey.</p>
+    <!-- SECTION 4: FINDINGS -->
+    <section class="case-section" id="findings">
+      <span class="section-num">04 · Findings</span>
+      <h2>Three questions answered. Three <em>pain points</em> validated.</h2>
+      <p class="intro-p">The research answered each of the product's three open questions. The landscape research identified who the product should serve and where existing tools fall short. The interviews and survey revealed what specific problems the product should solve. The design sprint determined what to build first. Here is what each phase produced.</p>
+
+      <!-- MOVEMENT 1 -->
+      <div class="movement-heading">Who this product is for, and where the gaps are</div>
+
+      <div class="landscape-cards">
+        <div class="landscape-card">
+          <h4>Gen Z leisure travelers are the rising market segment.</h4>
+          <p>They take nearly 5 trips/year, devote 29% of income to travel, and 53% prefer AI-assisted planning tools. This validated our target user and answered the judges' primary concern.</p>
+        </div>
+        <div class="landscape-card">
+          <h4>Current tools don't connect discovery, planning, and booking.</h4>
+          <p>Competitive analysis showed a fragmented landscape where no single tool handles the end-to-end journey. Opportunities in dynamic planning and real-time disruption handling are underaddressed.</p>
+        </div>
+        <div class="landscape-card">
+          <h4>Travel decision-making is multidimensional, sequential, and contingent.</h4>
+          <p>Academic literature established this three-factor model, which became the backbone of our interview protocol.</p>
+        </div>
+      </div>
+
+      <!-- MOVEMENT 2 -->
+      <div class="movement-heading">What users told us</div>
+
+      <div class="findings-bridge">The landscape research identified where to look. The interviews and survey revealed what we found when we looked there.</div>
 
       <!-- NUGGET 01 -->
       <div class="nugget">
         <div class="nugget-header">
           <div class="nugget-num">01</div>
           <div>
-            <span class="nugget-section-label">Observation</span>
-            <h3>Travel planning is not one decision. It is a spiral of micro-decisions that produces choice paralysis.</h3>
+            <h3>Travel planning is a complicated process that often leads to choice paralysis and decision fatigue. </h3>
           </div>
         </div>
         <div class="nugget-description">
-          <p>Unlike structured decision-making models, travel planning is a multi-layered, iterative process that forces travelers to navigate across multiple platforms and dozens of interdependent decisions. Destination, dates, flights, accommodations, activities, coordination with others, budget. The spiral produces <strong>choice paralysis and decision fatigue</strong>, and it reframes what the product needs to do.</p>
-          <p>Tripal did not need to become a better destination database. It needed to be a tool that reduced cognitive switching cost.</p>
+          <p>Travel planning forces people to navigate dozens of interdependent decisions across multiple platforms. Destination, dates, flights, accommodations, activities, coordination with others, budget. Each decision depends on others, and the constant switching between tools and tabs compounds into decision fatigue.</p>
         </div>
         <div class="nugget-evidence">
           <span class="nugget-section-label">Evidence</span>
@@ -615,10 +1051,6 @@
             <div class="evidence-item quote">
               <div class="marker"></div>
               <div class="body">I check flights, then I go check hotel prices, then I have to remember that number. Then I switch to figure out where I want to go each day. Later, when booking a train, I realize I need to check my hotel's checkout time again, then come back and adjust the ticket. It's a constant back-and-forth.<span class="attr">P07 · interview</span></div>
-            </div>
-            <div class="evidence-item data">
-              <div class="marker"></div>
-              <div class="body"><span class="stat">27.3%</span> of survey respondents explicitly identified "too many options to decide" as a major pain point in the travel planning process.</div>
             </div>
             <div class="evidence-item quote">
               <div class="marker"></div>
@@ -640,28 +1072,63 @@
         <div class="nugget-header">
           <div class="nugget-num">02</div>
           <div>
-            <span class="nugget-section-label">Observation</span>
-            <h3>Unexpected disruptions frustrate travelers more than the disruptions themselves warrant.</h3>
+            <h3>Even with thorough planning, unexpected disruptions can ruin expectations and lead to frustration. </h3>
           </div>
         </div>
         <div class="nugget-description">
-          <p>Even when people planned thoroughly (booking early, reading blogs, coordinating routes) they still ran into weather changes, delayed flights, restaurant closures, or sudden illness. These events did not just break the schedule. They emotionally deflated the entire experience. <strong>The pain was not the disruption itself. It was the absence of a graceful fallback.</strong></p>
-          <p>Users wanted backup plans suggested <em>before</em> they needed them, not after the situation had already collapsed.</p>
+          <p>Even when people planned thoroughly (booking early, reading blogs, coordinating routes) they still encountered weather changes, delayed flights, restaurant closures, or sudden illness. Travelers wanted backup plans suggested before they needed them, not after the situation had already collapsed.</p>
         </div>
         <div class="nugget-evidence">
           <span class="nugget-section-label">Evidence</span>
-          <div class="evidence-list">
-            <div class="evidence-item data">
-              <div class="marker"></div>
-              <div class="body"><span class="stat">29.4%</span> of survey respondents selected "handling unexpected situations" as a core challenge, making it the <strong>single most-cited pain point</strong> in the dataset.</div>
+          <div class="evidence-grid">
+            <div class="evidence-quotes">
+              <div class="evidence-item quote">
+                <div class="marker"></div>
+                <div class="body">Our flight was delayed and we had to rebook the hotel. Then someone got sick, so the whole day had to change. I just slept in the car while my friend drove.<span class="attr">P09 · interview</span></div>
+              </div>
+              <div class="evidence-item quote">
+                <div class="marker"></div>
+                <div class="body">It'd be great to have backup plans suggested ahead of time when something goes wrong. I wish there was a system that could warn me about local risks before I ran into them.<span class="attr">P12 · interview</span></div>
+              </div>
             </div>
-            <div class="evidence-item quote">
-              <div class="marker"></div>
-              <div class="body">Our flight was delayed and we had to rebook the hotel. Then someone got sick, so the whole day had to change. I just slept in the car while my friend drove.<span class="attr">P09 · interview</span></div>
-            </div>
-            <div class="evidence-item quote">
-              <div class="marker"></div>
-              <div class="body">It'd be great to have backup plans suggested ahead of time when something goes wrong. I wish there was a system that could warn me about local risks before I ran into them.<span class="attr">P12 · interview</span></div>
+            <div class="evidence-datavis">
+              <div class="pie-chart-wrap">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Background so stroke gaps read as evidence bg -->
+                  <rect width="200" height="200" fill="#FAF7EA"/>
+
+                  <!-- S2–S8: R=78, gap via bg-colored stroke -->
+                  <path d="M 174.19 124.10 A 78 78 0 0 1 145.85 163.10 L 127.04 137.21 A 46 46 0 0 0 143.75 114.21 Z" fill="#9BAF8F" stroke="#FAF7EA" stroke-width="2.5"/>
+                  <path d="M 145.85 163.10 A 78 78 0 0 1 100 178 L 100 146 A 46 46 0 0 0 127.04 137.21 Z" fill="#7A9E72" stroke="#FAF7EA" stroke-width="2.5"/>
+                  <path d="M 100 178 A 78 78 0 0 1 54.15 163.10 L 72.96 137.21 A 46 46 0 0 0 100 146 Z" fill="#5C8576" stroke="#FAF7EA" stroke-width="2.5"/>
+                  <path d="M 54.15 163.10 A 78 78 0 0 1 25.81 124.10 L 56.25 114.21 A 46 46 0 0 0 72.96 137.21 Z" fill="#9DB8B0" stroke="#FAF7EA" stroke-width="2.5"/>
+                  <path d="M 25.81 124.10 A 78 78 0 0 1 25.81 75.90 L 56.25 85.79 A 46 46 0 0 0 56.25 114.21 Z" fill="#B8A896" stroke="#FAF7EA" stroke-width="2.5"/>
+                  <path d="M 25.81 75.90 A 78 78 0 0 1 54.15 36.90 L 72.96 62.79 A 46 46 0 0 0 56.25 85.79 Z" fill="#6B8057" stroke="#FAF7EA" stroke-width="2.5"/>
+                  <path d="M 54.15 36.90 A 78 78 0 0 1 100 22 L 100 54 A 46 46 0 0 0 72.96 62.79 Z" fill="#C9BCA8" stroke="#FAF7EA" stroke-width="2.5"/>
+
+                  <!-- S1 highlighted: R=85 (larger), exploded 9px along mid-angle −36° -->
+                  <g transform="translate(7.3, -5.3)">
+                    <path d="M 100 15 A 85 85 0 0 1 180.84 126.27 L 143.75 114.21 A 46 46 0 0 0 100 54 Z" fill="#C8773A" stroke="#FAF7EA" stroke-width="2.5"/>
+                    <text x="153" y="63" text-anchor="middle"
+                          font-family="'Besley', Georgia, serif"
+                          font-size="12" font-weight="700"
+                          fill="#FAF7EA">42.6%</text>
+                  </g>
+
+                  <!-- Donut hole — matches evidence section bg -->
+                  <circle cx="100" cy="100" r="46" fill="#FAF7EA"/>
+
+                  <!-- Center label — Besley italic -->
+                  <text x="100" y="97" text-anchor="middle"
+                        font-family="'Besley', Georgia, serif"
+                        font-size="11" fill="#5B6652">Travel</text>
+                  <text x="100" y="111" text-anchor="middle"
+                        font-family="'Besley', Georgia, serif"
+                        font-size="11" fill="#5B6652">Pain Points</text>
+                </svg>
+              </div>
+              <p class="datavis-caption">Within our survey's high-value cluster (young, frequent, AI-open travelers), "handling unexpected situations" was the statistically significant friction point (p<0.01). </p>
+</p>
             </div>
           </div>
         </div>
@@ -679,154 +1146,127 @@
         <div class="nugget-header">
           <div class="nugget-num">03</div>
           <div>
-            <span class="nugget-section-label">Observation</span>
-            <h3>Group travel produces a specific kind of pain that solo travel does not.</h3>
+            <h3>Group travelers often face difficulties in planning due to diverse preferences and the logistical complexity of aligning multiple schedules. </h3>
           </div>
         </div>
         <div class="nugget-description">
-          <p>Traveling with friends or family is what most people prefer, but coordinating such trips often produces tension. Diverging preferences, poor communication, and unequal planning labor all compound. People described the emotional cost of being the planner: the social risk of feeling too controlling, the frustration of unresponsive group chats, and the quiet resentment of carrying the load alone.</p>
-          <p>Several interviewees told me they deliberately <strong>limited their travel companions to three or fewer</strong> specifically to avoid this pain. The insight pointed at group coordination as a distinct problem space, not a flavor of the planning spiral.</p>
+          <p>Traveling with friends or family is what most people prefer. Coordinating such trips often produces tension: diverging preferences, poor communication, and unequal planning labor. People described the emotional cost of being the planner, the social risk of feeling too controlling, the frustration of unresponsive group chats, and the quiet resentment of carrying the load alone.</p>
         </div>
         <div class="nugget-evidence">
           <span class="nugget-section-label">Evidence</span>
-          <div class="evidence-list">
-            <div class="evidence-item data">
-              <div class="marker"></div>
-              <div class="body"><span class="stat">26.1%</span> of survey respondents flagged "coordinating group schedules" as one of their top pain points.</div>
+          <div class="evidence-grid">
+            <div class="evidence-quotes">
+              <div class="evidence-item quote">
+                <div class="marker"></div>
+                <div class="body">My family usually has one person who ends up doing all the real planning. Others might help a bit, but not really. When I make plans, I always worry they'll think I'm being too controlling.<span class="attr">P05 · interview</span></div>
+              </div>
+              <div class="evidence-item quote">
+                <div class="marker"></div>
+                <div class="body">If you think about it, [a four-person trip] is <strong>exponential</strong> compared to a three-person one because you have to coordinate, right? Make sure everybody is cool with the plan.”<span class="attr">P11 · interview</span></div>
+              </div>
             </div>
-            <div class="evidence-item quote">
-              <div class="marker"></div>
-              <div class="body">My family usually has one person who ends up doing all the real planning. Others might help a bit, but not really. When I make plans, I always worry they'll think I'm being too controlling.<span class="attr">P05 · interview</span></div>
-            </div>
-            <div class="evidence-item quote">
-              <div class="marker"></div>
-              <div class="body">Three people are the upper limit for me. Beyond that, it's just too hard to coordinate. I only travel with close friends or family. If the group gets too big, my own plans always get compromised.<span class="attr">P11 · interview</span></div>
+            <div class="evidence-datavis">
+              <div class="big-stat-wrap">
+                <div class="big-stat-number">66%</div>
+                <div class="big-stat-caption">of the interviewees said that they limit their travel companions to 2 or fewer to avoid the hustles.</div>
+              </div>
             </div>
           </div>
         </div>
         <div class="nugget-tags">
           <span class="tag-label">Tags</span>
-          <span class="tag-pill severity-strategic">deferred</span>
           <span class="tag-pill theme">social-dynamics</span>
           <span class="tag-pill theme">coordination-labor</span>
           <span class="tag-pill phase">cross-phase</span>
         </div>
       </div>
 
-      <!-- Trade-off callout -->
-      <div class="trade-off-callout">
-        <div class="icon-frame">!</div>
-        <div>
-          <h4>The hardest call the research enabled.</h4>
-          <p>The first two insights drove every core feature the team decided to build. The third, group coordination, was the founder's <em>original motivation</em> for the entire product. And it was the one we pushed into a future-work column rather than v1.</p>
-          <p>Building group features first felt emotionally right. But the research said that solving cognitive switching cost and disruption recovery would reach a broader audience, and fit within the build timeline we had. Letting the research override the founder's origin story was the right decision. It was only possible because the research had produced findings the team trusted enough to act against their first instinct.</p>
-        </div>
-      </div>
     </section>
 
-    <!-- SECTION 5: IMPACT -->
-    <section class="case-section" id="impact">
-      <span class="section-num">05 · Impact &amp; Decisions Influenced</span>
-      <h2>Four features, one deferral, and a <em>pitch that landed.</em></h2>
-      <p class="intro-p">The design sprint converged the team on four core features. Each one maps directly back to an insight the research produced, and each one represents a decision the team would not have made the same way without the data under it.</p>
+    <!-- SECTION 5: FROM FINDINGS TO FEATURES -->
+    <section class="case-section" id="features">
+      <span class="section-num">05 · From Findings to Features</span>
+      <h2>Four features, and a pitch that <em>landed.</em></h2>
+      <p class="intro-p">The design sprint converged the team on four core features. Each one maps directly to a research finding, and each represents a decision the team would not have made the same way without evidence under it.</p>
 
       <div class="feature-gallery">
+
         <div class="feature-card">
           <div class="visual">
-            <div class="bg-shape"></div>
-            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 1;">
-              <rect x="8" y="18" width="24" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <rect x="40" y="18" width="24" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <path d="M32 36 L40 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="20" cy="28" r="2" fill="currentColor"/>
-              <path d="M14 40 L26 40 M14 46 L22 46" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="52" cy="28" r="2" fill="currentColor"/>
-              <path d="M46 40 L58 40 M46 46 L54 46" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            <video autoplay loop muted playsinline>
+              <source src="assets/tripal/tripal-smart-link-and-photo-recognition.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="content">
-            <span class="nugget-link">◆ from nugget 01</span>
+            <span class="nugget-link">◆ finding 01</span>
             <h4>Smart Link &amp; Photo Recognition</h4>
-            <p>Import travel inspiration from social media in one tap. The app detects restaurants, landmarks, and locations from shared links or screenshots, and saves them to the itinerary automatically. Reduces the mental overhead of toggling between apps.</p>
+            <p>Import travel inspiration from social media in one tap. The app detects restaurants, landmarks, and locations from shared links or screenshots, and saves them to the itinerary. Reduces the toggling between apps that was producing decision fatigue.</p>
           </div>
         </div>
 
         <div class="feature-card">
           <div class="visual">
-            <div class="bg-shape"></div>
-            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 1;">
-              <rect x="12" y="10" width="48" height="54" rx="4" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <circle cx="20" cy="22" r="2.5" fill="currentColor"/>
-              <path d="M28 22 L52 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="20" cy="34" r="2.5" fill="currentColor"/>
-              <path d="M28 34 L48 34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="20" cy="46" r="2.5" fill="currentColor"/>
-              <path d="M28 46 L50 46" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M20 28 L20 29 M20 40 L20 41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 2"/>
-            </svg>
+            <video autoplay loop muted playsinline>
+              <source src="assets/tripal/tripal-reservation-hub.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="content">
-            <span class="nugget-link">◆ from nugget 01</span>
-            <h4>Smart Itinerary Planning</h4>
-            <p>Flexible, well-paced multi-day itineraries with AI assistance and manual control. Activity-level planning, transit times built in, and a structure that adapts to travel style. Cuts the planning effort that was producing choice paralysis.</p>
+            <span class="nugget-link">◆ Finding 01</span>
+            <span class="nugget-link">◆ Finding 03</span>
+            <h4>Reservation Hub</h4>
+            <p>All bookings in one place. Import flight, hotel, and rental car confirmations, and the app structures them automatically. No more toggling between email threads and booking platforms to remember what was arranged.</p>
           </div>
         </div>
 
         <div class="feature-card">
           <div class="visual">
-            <div class="bg-shape"></div>
-            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 1;">
-              <rect x="10" y="14" width="52" height="44" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <path d="M10 28 L62 28 M10 42 L62 42 M24 14 L24 58 M44 14 L44 58" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
-              <path d="M30 22 C30 18 33 16 36 16 C39 16 42 18 42 22 C42 26 36 32 36 32 C36 32 30 26 30 22 Z" fill="currentColor"/>
-              <circle cx="36" cy="22" r="2" fill="var(--bg-alt)"/>
-            </svg>
+            <video autoplay loop muted playsinline>
+              <source src="assets/tripal/tripal-travel-tips-and-itinerary.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="content">
-            <span class="nugget-link">◆ from nugget 01</span>
-            <h4>Map View</h4>
-            <p>Turn the trip into a spatial object rather than a list. Pin locations by day, preview routes, and understand at a glance whether the plan makes geographic sense. Reduces backtracking and improves schedule efficiency.</p>
+            <span class="nugget-link">◆ Finding 01</span>
+            <span class="nugget-link">◆ Finding 02</span>
+            <h4>Multi-day Itinerary &amp; Smart Travel Tips</h4>
+            <p>Flexible, well-paced multi-day itineraries with personalized checklist generated from the itinerary. Activity-level planning with transit times built in. Reduces redundant backtracking and improves schedule efficiency.</p>
           </div>
         </div>
 
         <div class="feature-card">
           <div class="visual">
-            <div class="bg-shape"></div>
-            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 1;">
-              <path d="M24 28 C24 20 29 14 36 14 C43 14 48 20 48 28 L48 40 L52 46 L20 46 L24 40 Z" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-              <path d="M32 52 C32 55 34 57 36 57 C38 57 40 55 40 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="52" cy="20" r="5" fill="currentColor"/>
-              <path d="M49 20 L52 23 L56 18" stroke="var(--bg-alt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <video autoplay loop muted playsinline>
+              <source src="assets/tripal/tripal-adaptive-suggestions.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="content">
-            <span class="nugget-link">◆ from nugget 02</span>
-            <h4>Adaptive Suggestion</h4>
-            <p>Detect disruptions like weather, closures, or transit delays, and proactively suggest alternatives before the plan collapses. Directly answers the most-cited pain point in the survey data, and reframes the app as a trip safety net.</p>
+            <span class="nugget-link">◆ Finding 02</span>
+            <h4>Adaptive Suggestions</h4>
+            <p>Detects disruptions like weather, closures, or transit delays, and proactively suggests alternatives before the plan collapses. Directly addresses the most-cited pain point in the survey data, and reframes the app as a trip safety net.</p>
           </div>
         </div>
+
       </div>
 
       <div class="usability-mini">
-        <div class="mini-label">Round of usability testing</div>
-        <h4>Pre-launch iterations on labels, icons, and mobile sizing.</h4>
-        <p>After the team converged on features, I ran a round of usability testing with four participants simulating a two-day Paris trip. The test surfaced concrete iterations rather than headline findings. Labels like "Travel Insights" and "Batch import" were renamed, the AI "magic button" iconography was clarified, attraction cards were enlarged for mobile, and the weather alert was redesigned to be more proportionate. These are the kind of pre-pitch corrections that make the difference between a demo that lands and a demo that confuses.</p>
+        <div class="mini-label">Pre-pitch usability validation</div>
+        <h4>Pre-pitch usability validation.</h4>
+        <p>After the team converged on features, I ran a round of usability testing with four participants simulating a two-day Paris trip. The test surfaced concrete iterations: labels like "Travel Insights" and "Batch import" were renamed, the AI "magic button" iconography was clarified, attraction cards were enlarged for mobile, and the weather alert was redesigned to be more proportionate. These are the kind of pre-pitch corrections that make the difference between a demo that lands and a demo that confuses.</p>
       </div>
 
       <div class="outcome-block">
         <div class="ob-decor-a"></div>
         <div class="ob-decor-b"></div>
-        <div class="ob-label">Pitch outcome · Fall 2024</div>
-        <h3>The research held its weight in front of <em>real investors.</em></h3>
-        <p class="ob-lede">Target market became grounded in qual and quant data. Differentiation became tied to specific user moments that existing tools did not handle. The judges' questions from two months earlier each had an evidence-backed answer.</p>
+        <div class="ob-label">Pitch outcome</div>
+        <h3>The research held its weight in front of <em>investors.</em></h3>
+        <p class="ob-lede">The investor pitch incorporated the research framing directly. Target market was grounded in quantitative data. Differentiation was tied to specific user moments that existing tools did not handle. The team had evidence-backed answers to the questions that had tripped them up two months earlier.</p>
         <div class="ob-metrics">
           <div class="ob-metric">
             <div class="big">2nd place</div>
-            <div class="lbl">At the business startup competition. The same judges who had torn the original pitch apart recognized the new one.</div>
+            <div class="lbl">At the business startup competition, after a research-led pitch that answered every question the jury had raised.</div>
           </div>
           <div class="ob-metric">
             <div class="big">Early funding</div>
-            <div class="lbl">Secured from investors after the pitch. The research was not the only thing that mattered, but the pitch would not have landed the same way without it.</div>
+            <div class="lbl">Secured from investors after the pitch. The research was not the only thing that mattered, but it was the foundation.</div>
           </div>
         </div>
       </div>
@@ -836,27 +1276,14 @@
     <section class="case-section" id="reflection">
       <span class="section-num">06 · Reflection</span>
       <h2>Lessons I <em>carry forward.</em></h2>
-      <p class="intro-p">Tripal was the first time I owned a research cycle end to end under real time pressure, in front of real stakeholders, with real stakes attached. Two lessons stuck, and I carry both forward into how I think about UXR now.</p>
-
-      <div class="reflection-wrap">
-        <div>
-          <p class="intro-p">The first is about <strong>timeline discipline</strong>. The research took most of the project window, and the design sprint took most of what was left, which meant we had almost no room for iteration after the feature set was chosen. If I ran this again, I would compress the early desktop and interview phases to buy back a week of iteration time at the end. The value of iteration in a startup context is hard to overstate. The cost of being wrong about a feature compounds with every day you cannot revise it.</p>
-          <p class="intro-p">The second lesson is more specific and has changed how I think about synthesis. In the design sprint, I presented the interview data as <strong>organized clusters</strong>, arranged into a framework that mapped to the stages of travel decision-making. The framework was sound. The participants in the sprint could not fully digest the volume of data even with that structure. They absorbed the framework shape but not the texture of what people actually said, which is where a lot of the product intuition should have come from.</p>
-          <p class="intro-p">If I ran this again, I would try a different artifact for the sprint. Possibly feeding the interview data into a tool like NotebookLM to create a conversational interface the team could query directly. Or building a smaller set of synthetic user personas grounded in the interview material that team members could interrogate during ideation. <strong>The principle I take from this is that research artifacts are not just containers for findings. They are interfaces between researchers and the people who have to act on the findings, and that interface has its own usability to design for.</strong></p>
+      <div class="reflection-callouts">
+        <div class="callout">
+          <span class="kind">On timeline discipline</span>
+          <p>The research took most of the project window, and the design sprint took most of what was left, which meant we had almost no room for iteration after the feature set was chosen. If I ran this again, I would compress the early desktop and interview phases to buy back a week of iteration time at the end. The value of iteration in a startup context compounds with every day you cannot revise.</p>
         </div>
-        <div class="callouts">
-          <div class="callout">
-            <span class="kind">On timelines</span>
-            <p>Next time, compress the front end to buy back iteration time. A week of iteration is worth three days of extra fieldwork.</p>
-          </div>
-          <div class="callout">
-            <span class="kind">On artifacts</span>
-            <p>Research artifacts are interfaces. The sprint deck is a product, and sprint participants are users. Design for that.</p>
-          </div>
-          <div class="callout">
-            <span class="kind">On trade-offs</span>
-            <p>The hardest research moments are when findings push back against the founder's original instinct. Respecting that tension is part of the job.</p>
-          </div>
+        <div class="callout">
+          <span class="kind">On how research gets absorbed by a team</span>
+          <p>In the design sprint, I presented the affinity maps of the interview data to the team members, in hopes that raw data helps with divergent thinking. Instead, what happened is that participants could not fully digest the volume of data, and it led to more personal bias being introduced during discussion. If I ran this again, I would try a different artifact: personas, user journey maps, or building a smaller set of synthetic user personas grounded in the interview material that team members could interrogate during ideation. Research artifacts are interfaces between researchers and the people who act on the findings, and that interface has its own usability to design for.</p>
         </div>
       </div>
     </section>
@@ -875,7 +1302,7 @@
     </div>
     <a href="safemo.html" class="visual">
       <h3>Safemo</h3>
-      <p class="sub">2-round longitudinal · 5 families · setup time cut by 77%</p>
+      <p class="sub">2-round longitudinal · internship · setup time cut by 66%</p>
       <div class="decor"></div>
     </a>
   </div>
@@ -913,10 +1340,43 @@
     </div>
     <div class="colophon">
       <span>© 2026 Daniel Li · Built in Los Angeles</span>
-      <span>Set in Besley, Figtree &amp; JetBrains Mono</span>
+      <span>Set in Besley &amp; Figtree</span>
     </div>
   </div>
 </footer>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightbox-close">ESC · close</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  (function () {
+    const lb     = document.getElementById('lightbox');
+    const lbImg  = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+
+    function open(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    document.querySelectorAll('.phase-row .pr-visual img').forEach(function (img) {
+      img.addEventListener('click', function () { open(img.src, img.alt); });
+    });
+
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    lbClose.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
 </body>
 </html>

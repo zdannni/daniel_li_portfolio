@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Li — UX Researcher &amp; Research Operations</title>
 <meta name="description" content="Daniel Li is a UX Researcher and Research Operations practitioner based in Los Angeles.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="styles.css">
 <style>
   /* -------- HOME: Hero -------- */
@@ -69,6 +67,10 @@
   }
   .home-hero h1 .line { display: block; }
   .home-hero h1 em { font-weight: 500; }
+  .home-hero p {
+    max-width: min(644px, 100%);
+    margin-bottom: 48px;
+  }
   .home-hero .cta-row {
     display: flex;
     gap: 14px;
@@ -212,6 +214,44 @@
     z-index: 1;
     margin: 0;
   }
+  /* ---- Safemo card banner ---- */
+  .safemo-card .visual {
+    background-image: url('assets/safemo/safemo-case-study-banner.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .safemo-card .visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(45, 58, 35, 0.60); /* --primary-deep at 60% */
+    z-index: 0;
+    transition: opacity 0.4s ease;
+  }
+  .safemo-card:hover .visual::before {
+    opacity: 0;
+  }
+  .safemo-card .visual > * { position: relative; z-index: 1; }
+
+  /* ---- Tripal card banner ---- */
+  .tripal-card .visual {
+    background-image: url('assets/tripal/tripal-case-study-banner.png');
+    background-size: cover;
+    background-position: center;
+  }
+  .tripal-card .visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(45, 58, 35, 0.60);
+    z-index: 0;
+    transition: opacity 0.4s ease;
+  }
+  .tripal-card:hover .visual::before {
+    opacity: 0;
+  }
+  .tripal-card .visual > * { position: relative; z-index: 1; }
+
   .project-card .visual .decor-a {
     position: absolute;
     bottom: -60px;
@@ -474,6 +514,7 @@
       <a href="index.html" class="active">Work</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="#">Resume</a>
     </div>
   </nav>
 </header>
@@ -488,9 +529,10 @@
   <div class="container">
     <div class="eyebrow">Hello, I'm Daniel</div>
     <h1>
-      <span class="line">User research for teams</span>
-      <span class="line">with <em>hard questions.</em></span>
+      <span class="line">User research for</span>
+      <span class="line">teams with <em>hard questions.</em></span>
     </h1>
+    <p>I'm Daniel, a UX Researcher in San Jose. I like the part of research where the clean framework meets the messy reality, and you have to figure out what actually matters. </p>
     <div class="cta-row">
       <a href="#work" class="btn btn-primary">See selected work <span class="arrow">→</span></a>
       <a href="about.html" class="btn btn-secondary">About me</a>
@@ -504,7 +546,7 @@
     <span><i class="status-dot"></i> <b>Available</b> · Spring 2026</span>
     <span>Based in <b>San Jose, CA</b></span>
     <span>Speaks <b>EN / 中文</b></span>
-    <span>MS Information, <b>U-Michigan '24</b></span>
+    <span>MS Information, <b>U-Michigan '25</b></span>
   </div>
 </div>
 
@@ -514,35 +556,33 @@
     <div class="work-header">
       <div class="headline">
         <h2>Selected work.</h2>
-        <p>Two projects that shaped how I think about research as a practice. One internship with real business impact, one full research program owned end to end.</p>
       </div>
-      <div class="count">2 Projects · 2024</div>
+
     </div>
 
     <div class="project-grid">
       <!-- SAFEMO CARD -->
-      <a href="safemo.html" class="project-card">
+      <a href="safemo.html" class="project-card safemo-card">
         <div class="visual">
-          <span class="tag featured">★ Featured · Internship</span>
+          <span class="tag featured">Internship</span>
+          <span class="tag featured">Evaluative</span>
           <h3>Safemo</h3>
           <p class="subtitle">Turning a failing launch into a usable product.</p>
-          <div class="decor-a"></div>
-          <div class="decor-b"></div>
         </div>
         <div class="content">
           <p class="intro-text">A privacy-first security camera that missed its launch projections. Multi-stage research diagnosed why, and validated the fix.</p>
           <div class="metrics-row">
             <div class="metric-inline">
-              <div class="num">−77%</div>
-              <div class="label">Average Setup time</div>
+              <div class="num">−66%</div>
+              <div class="label">Reduction in setup time</div>
             </div>
             <div class="metric-inline">
-              <div class="num">155%</div>
+              <div class="num">3.3→8.7</div>
               <div class="label">Increase in User Rating</div>
             </div>
             <div class="metric-inline">
-              <div class="num">30%</div>
-              <div class="label">Reduction in support tickets</div>
+              <div class="num">7/9</div>
+              <div class="label">Adopted Recommendations</div>
             </div>
           </div>
           <span class="read-more">Read case study <span class="arrow">→</span></span>
@@ -550,13 +590,12 @@
       </a>
 
       <!-- TRIPAL CARD -->
-      <a href="tripal.html" class="project-card">
+      <a href="tripal.html" class="project-card tripal-card">
         <div class="visual">
-          <span class="tag">Capstone · 2024</span>
+          <span class="tag featured">Startup</span>
+          <span class="tag featured">Generative</span>
           <h3>Tripal</h3>
-          <p class="subtitle">Finding product-market fit under a 2-week deadline.</p>
-          <div class="decor-a"></div>
-          <div class="decor-b"></div>
+          <p class="subtitle">Finding product-market fit under a 2-month deadline.</p>
         </div>
         <div class="content">
           <p class="intro-text">A travel startup whose assumptions had been picked apart by competition juries. I led a full research program that reshaped the pitch and secured early funding.</p>
@@ -628,8 +667,8 @@
         <p>I am currently looking for UXR and Research Operations roles. If you are building a team that cares about the practice, I would love to hear from you.</p>
       </div>
       <div class="actions">
-        <a href="mailto:your.email@example.com" class="btn btn-primary">Send an email <span class="arrow">→</span></a>
-        <a href="contact.html" class="btn btn-secondary">All the ways to reach me</a>
+        <a href="mailto:zhiboliuxr@gmail.com" class="btn btn-primary">Send an email <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-secondary">See my resume</a>
       </div>
       <div class="decor"></div>
       <div class="decor-2"></div>
@@ -669,7 +708,7 @@
     </div>
     <div class="colophon">
       <span>© 2026 Daniel Li · Built in Los Angeles</span>
-      <span>Set in Besley, Figtree &amp; JetBrains Mono</span>
+      <span>Set in Besley &amp; Figtree</span>
     </div>
   </div>
 </footer>
