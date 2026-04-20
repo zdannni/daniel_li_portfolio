@@ -673,69 +673,10 @@
     .outcome-block .ob-metric .big { font-size: 2rem; }
   }
 
-  /* -------- Lightbox -------- */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(29, 41, 35, 0.88);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-    cursor: zoom-out;
-  }
-  .lightbox.is-open { display: flex; }
-  .lightbox img {
-    max-width: min(90vw, 1100px);
-    max-height: 88vh;
-    object-fit: contain;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 32px 80px rgba(0,0,0,0.45);
-    cursor: default;
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 24px; right: 28px;
-    background: none;
-    border: none;
-    color: rgba(239,236,223,0.7);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    padding: 8px 12px;
-    transition: color 0.15s;
-  }
-  .lightbox-close:hover { color: var(--bg); }
 
-  /* Clickable hint on research images */
-  .phase-row .pr-visual img {
-    cursor: zoom-in;
-    transition: opacity 0.18s;
-  }
-  .phase-row .pr-visual img:hover { opacity: 0.88; }
-
-  /* ---- Next project: Safemo card visual ---- */
   .next-project .visual {
     background-image: url('assets/safemo/safemo-case-study-banner.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
   }
-  .next-project .visual::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(45, 58, 35, 0.60);
-    border-radius: inherit;
-    z-index: 0;
-    transition: opacity 0.4s ease;
-  }
-  .next-project .visual:hover::before { opacity: 0; }
-  .next-project .visual > * { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
@@ -746,8 +687,8 @@
     <div class="nav-links">
       <a href="index.html" class="active">Work</a>
       <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="#">Resume</a>
+      <a href="mailto:zhiboliuxr@gmail.com">Contact</a>
+      <a href="assets/daniel-li-resume.pdf" target="_blank">Resume</a>
     </div>
   </nav>
 </header>
@@ -764,7 +705,7 @@
       <h1>From jury critique to <em>investor funding.</em></h1>
       <p class="case-subtitle">A full research program that turned a startup's torn-apart pitch into product-market fit clarity, in time for a real investor presentation.</p>
     </div>
-    <div class="hero-meta">
+    <div class="hero-meta card">
       <div class="meta-row"><span class="meta-key">Client</span><span class="meta-val">Tripal · travel startup</span></div>
       <div class="meta-row"><span class="meta-key">My role</span><span class="meta-val">Research Lead, full cycle owner</span></div>
       <div class="meta-row"><span class="meta-key">Timeline</span><span class="meta-val">Aug 2025 to Nov 2025</span></div>
@@ -792,8 +733,8 @@
         <div class="num">Early <em>$</em></div>
         <div class="label">Investor funding<br>secured after pitch</div>
       </div>
-      <div class="decor-a"></div>
-      <div class="decor-b"></div>
+      <div class="decor-a decor-blob"></div>
+      <div class="decor-b decor-blob"></div>
     </div>
   </div>
 </section>
@@ -1299,11 +1240,12 @@
       <h2>Turning a failing launch into a <em>usable product.</em></h2>
       <p>How two rounds of longitudinal field research diagnosed why a privacy-first security camera failed at launch, then validated the fix. The star project, and the one where I learned what research operations actually means.</p>
       <a href="safemo.html" class="btn btn-primary">Read Safemo case study <span class="arrow">→</span></a>
+      <a href="assets/daniel-li-resume.pdf" target="_blank" class="btn btn-secondary">View resume (PDF)</a>
     </div>
-    <a href="safemo.html" class="visual">
+    <a href="safemo.html" class="visual" style="background-image: url('assets/safemo/safemo-case-study-banner.jpg')">
       <h3>Safemo</h3>
       <p class="sub">2-round longitudinal · internship · setup time cut by 66%</p>
-      <div class="decor"></div>
+      <div class="decor decor-blob"></div>
     </a>
   </div>
 </section>
@@ -1313,14 +1255,13 @@
   <div class="container">
     <div class="footer-intro">
       <h3>Daniel Li.</h3>
-      <p class="tagline">UX Researcher &amp; Research Operations practitioner. Based in Los Angeles.</p>
+      <p class="tagline">UX Researcher &amp; Research Operations practitioner.</p>
     </div>
     <div class="footer-col">
       <h4>Navigate</h4>
       <ul>
         <li><a href="index.html">Work</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1331,22 +1272,23 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Elsewhere</h4>
+      <h4>Contact</h4>
       <ul>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">Email</a></li>
-        <li><a href="#">Resume (PDF)</a></li>
+        <li><a href="https://www.linkedin.com/in/zhibo-li-ux/">LinkedIn</a></li>
+        <li><a href="mailto:zhiboliuxr@gmail.com">Email</a></li>
+        <li><a href="assets/daniel-li-resume.pdf" target="_blank">Resume (PDF)</a></li>
       </ul>
     </div>
     <div class="colophon">
-      <span>© 2026 Daniel Li · Built in Los Angeles</span>
+      <span>© 2026 Daniel Li</span>
       <span>Set in Besley &amp; Figtree</span>
     </div>
   </div>
 </footer>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+  <span id="lightbox-title" class="sr-only">Image preview</span>
   <button class="lightbox-close" id="lightbox-close">ESC · close</button>
   <img id="lightbox-img" src="" alt="">
 </div>

@@ -30,7 +30,7 @@
   /* Typography */
   --font-display: 'Besley', Georgia, serif;
   --font-body:    'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:    'Figtree', 'Courier New', monospace;
+  --font-mono:    'Figtree', 'Consolas', 'Courier New', monospace;
 
   /* Scale */
   --radius-sm: 4px;
@@ -68,6 +68,7 @@ body {
 }
 
 img, svg { display: block; max-width: 100%; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
 
@@ -298,6 +299,35 @@ section { position: relative; }
   border: none;
   height: 1px;
   background: var(--border);
+}
+
+/* -------- Shared animation shapes -------- */
+.shape-circle, .orb {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+/* -------- Decorative blobs -------- */
+.decor-blob {
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* -------- Button dark-background modifier -------- */
+.btn-on-dark.btn-primary {
+  background: var(--bg);
+  color: var(--ink);
+}
+.btn-on-dark.btn-primary:hover { background: var(--accent); color: var(--ink); }
+.btn-on-dark.btn-secondary {
+  border-color: rgba(239, 236, 223, 0.35);
+  color: var(--bg);
+}
+.btn-on-dark.btn-secondary:hover {
+  background: rgba(239, 236, 223, 0.1);
+  color: var(--bg);
+  border-color: var(--bg);
 }
 
 /* -------- Shared card component -------- */
