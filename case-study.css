@@ -5,20 +5,38 @@
 
 /* -------- Breadcrumb + back -------- */
 .case-back {
-  padding: 32px 0 0;
+  padding: 32px 0 0 16px;
 }
 .case-back .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink-2);
+  text-decoration: none;
   transition: color 0.2s;
+  border-radius: 2px;
 }
-.case-back .back-link:hover { color: var(--primary); }
+.case-back .back-link .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.case-back .back-link:hover,
+.case-back .back-link:focus-visible {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.case-back .back-link:hover .arrow,
+.case-back .back-link:focus-visible .arrow { transform: translateX(-4px); }
+.case-back .back-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-back .back-link .arrow { transition: none; }
+}
 
 /* -------- Case Study Hero -------- */
 .case-hero {
@@ -39,7 +57,7 @@
 }
 .case-hero .eyebrow { margin-bottom: 28px; }
 .case-hero h1 {
-  font-size: clamp(3rem, 6.5vw, 5.75rem);
+  font-size: clamp(2.875rem, 6.5vw, 5.625rem);
   font-weight: 500;
   line-height: 0.98;
   letter-spacing: -0.025em;
@@ -207,7 +225,7 @@
   border-bottom: 1px solid var(--primary);
 }
 .case-section h2 {
-  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-size: clamp(1.875rem, 3.8vw, 2.875rem);
   line-height: 1.05;
   margin-bottom: 28px;
   max-width: 720px;
@@ -909,7 +927,7 @@
 }
 .next-project .eyebrow { margin-bottom: 24px; }
 .next-project h2 {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.875rem, 3.5vw, 2.625rem);
   line-height: 1.1;
   margin-bottom: 16px;
 }
